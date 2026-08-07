@@ -855,15 +855,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink);
-  transition: transform 0.4s var(--ease-spring), background 0.3s var(--ease-out), border-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
-}
-
-.offer-row:hover .offer-row__icon {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-  transform: rotate(45deg);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--accent-dark);
+  background: var(--accent-pale);
 }
 
 .offer-list__cta {
@@ -1635,7 +1630,7 @@ button {
   .services-grid, .steps, .ba-grid { grid-template-columns: 1fr; }
   .price-block { padding: var(--space-xl) var(--space-md); }
   .price-row { flex-direction: column; gap: 0.3rem; }
-  .price-row__meta { justify-content: space-between; }
+  .price-row__meta { justify-content: flex-end; }
   .offer-row {
     grid-template-columns: 1fr auto;
     grid-template-areas: "title icon" "desc icon";
