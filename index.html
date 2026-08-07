@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Swibrows · Institut de&nbsp;beauté &amp; formation à&nbsp;Saint-Germain-en-Laye</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  html:not([data-lang="fr"]) [data-fr] { display: none !important; }
+  html[data-lang="fr"] [data-ru] { display: none !important; }
+
+  .welcome-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .welcome-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-lg);
+  }
+
+  .welcome-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+  }
+
+  .welcome-logo span {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+
+  .welcome-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-xl);
+    padding-block: var(--space-xl);
+  }
+
+  .welcome-intro {
+    max-width: 900px;
+    margin-inline: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .welcome-intro .h1 {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .welcome-intro .h1 {
+      white-space: normal;
+    }
+  }
+
+  .welcome-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+</style>
+</head>
+<body>
+
+<div class="marble welcome-hero">
+  <div class="container welcome-top">
+    <div class="welcome-logo">SWIBROWS<span data-ru>Институт красоты</span><span data-fr>Institut de&nbsp;beauté</span></div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-set-lang="ru" aria-current="true">RU</button>
+      <button type="button" data-set-lang="fr">FR</button>
+    </div>
+  </div>
+
+  <div class="container welcome-body">
+    <div class="welcome-intro reveal">
+      <span class="kicker" data-ru>Saint-Germain-en-Laye</span>
+      <span class="kicker" data-fr>Saint-Germain-en-Laye</span>
+      <h1 class="h1" data-ru>Выберите свой&nbsp;путь</h1>
+      <h1 class="h1" data-fr>Choisissez votre&nbsp;parcours</h1>
+      <p class="lede" data-ru>Обучение авторской технике безлазерного удаления пигмента или&nbsp;запись на&nbsp;процедуру в&nbsp;салоне Светланы.</p>
+      <p class="lede" data-fr>Une&nbsp;formation à&nbsp;la&nbsp;technique exclusive de&nbsp;détatouage sans laser ou&nbsp;un&nbsp;rendez-vous dans le&nbsp;salon de&nbsp;Svetlana.</p>
+    </div>
+
+    <div class="container">
+      <div class="choice reveal-stagger">
+        <a class="choice-card" data-href-ru="course-ru.html" data-href-fr="course-fr.html" href="course-ru.html">
+          <img src="images/svetlana/choice-course.jpg" alt="Svetlana" />
+          <div class="choice-card__body">
+            <span class="choice-card__kicker" data-ru>Обучение</span>
+            <span class="choice-card__kicker" data-fr>Formation</span>
+            <span class="choice-card__title" data-ru>Курс по&nbsp;удалению пигмента</span>
+            <span class="choice-card__title" data-fr>Formation détatouage</span>
+            <span class="choice-card__desc" data-ru>Освойте безопасную безлазерную технику и&nbsp;начните принимать клиентов уже после первого курса.</span>
+            <span class="choice-card__desc" data-fr>Maîtrisez la&nbsp;technique sûre et&nbsp;sans laser, et&nbsp;commencez à&nbsp;recevoir des&nbsp;clientes dès la&nbsp;fin de&nbsp;la&nbsp;formation.</span>
+            <span class="choice-card__cta"><span data-ru>Смотреть курс</span><span data-fr>Voir la&nbsp;formation</span> <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="choice-card" data-href-ru="salon-ru.html" data-href-fr="salon-fr.html" href="salon-ru.html">
+          <img src="images/svetlana/choice-salon.jpg" alt="Svetlana" />
+          <div class="choice-card__body">
+            <span class="choice-card__kicker" data-ru>Услуги салона</span>
+            <span class="choice-card__kicker" data-fr>Services du&nbsp;salon</span>
+            <span class="choice-card__title" data-ru>Запись к&nbsp;Светлане</span>
+            <span class="choice-card__title" data-fr>Rendez-vous avec Svetlana</span>
+            <span class="choice-card__desc" data-ru>Перманентный макияж, удаление пигмента и&nbsp;уход за&nbsp;лицом в&nbsp;институте красоты Swibrows.</span>
+            <span class="choice-card__desc" data-fr>Maquillage permanent, détatouage et&nbsp;soins du&nbsp;visage à&nbsp;l'institut de&nbsp;beauté Swibrows.</span>
+            <span class="choice-card__cta"><span data-ru>Записаться</span><span data-fr>Prendre rendez-vous</span> <span class="arrow">→</span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container welcome-foot">
+    <span data-ru>2 Rue Raymond Gréban, 78100 Saint-Germain-en-Laye</span>
+    <span data-fr>2 Rue Raymond Gréban, 78100 Saint-Germain-en-Laye</span>
+    <span data-ru>Пн–Сб 10:00–20:00</span>
+    <span data-fr>Lun–Sam 10h–20h</span>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll("[data-set-lang]");
+  function applyLang(lang) {
+    root.setAttribute("data-lang", lang);
+    root.setAttribute("lang", lang);
+    buttons.forEach((b) => b.setAttribute("aria-current", b.dataset.setLang === lang ? "true" : "false"));
+    document.querySelectorAll("[data-href-ru]").forEach((a) => {
+      a.setAttribute("href", lang === "fr" ? a.dataset.hrefFr : a.dataset.hrefRu);
+    });
+  }
+  buttons.forEach((b) => b.addEventListener("click", () => applyLang(b.dataset.setLang)));
+  applyLang("ru");
+</script>
+</body>
+</html>

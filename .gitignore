@@ -1,0 +1,9 @@
+node_modules/
+temporary screenshots/
+.DS_Store
+
+# Design/reference material not used by the live site
+desktop.png
+mobile.png
+marinabond.ru_.png
+photo actor/
