@@ -295,8 +295,8 @@ body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotat
 }
 
 /* ---------- hero ---------- */
-.hero{padding:172px 0 0;overflow:hidden}
-.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:880px}
+.hero{padding:132px 0 0;overflow:hidden}
+.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:min(880px,calc(100vh - 172px))}
 .hero__copy{position:relative;z-index:2;max-width:625px;padding:8px 0 0}
 .chip{
   display:inline-flex;align-items:center;gap:9px;background:#fff;border-radius:999px;
@@ -705,20 +705,28 @@ body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotat
   .band{padding:var(--s-6) 0}
   /* the reference leads with the message, then the portrait, button over its lower edge */
   .h2 br{display:none}
-  .hero{padding:100px 0 34px}
-  .hero__grid{flex-direction:column;align-items:stretch;min-height:0;text-align:center}
-  .hero__copy{order:1;max-width:none;padding:0}
-  .hero__photo{
-    order:2;position:static;top:auto;width:min(100%,330px);height:auto;
-    margin:18px auto 0;display:block;overflow:visible;
+  /* the hero holds one screen: the portrait takes whatever height is left
+     over, so the button sits above the fold on every phone */
+  .hero{
+    padding:86px 0 44px;display:flex;flex-direction:column;
+    min-height:100vh;min-height:100svh;
   }
-  .hero__photo img{width:100%;height:auto;max-width:100%;margin-bottom:0}
-  .hero__cta{order:3;position:relative;z-index:3;margin:-40px 0 0}
-  .hero__cta .btn{min-height:58px;padding:0 30px;font-size:13px}
-  .hero__chip{padding:11px 20px;font-size:12.5px;gap:10px}
-  .hero__title{margin-top:26px}
-  .hero__rule{margin:28px auto 0;max-width:300px}
-  .hero__sub{max-width:none;margin-left:auto;margin-right:auto;font-size:15px}
+  .hero__grid{
+    flex:1;min-height:0;flex-direction:column;align-items:stretch;
+    justify-content:flex-start;text-align:center;
+  }
+  .hero__copy{order:1;flex:0 0 auto;max-width:none;padding:0}
+  .hero__photo{
+    order:2;position:static;top:auto;flex:1 1 0;min-height:150px;
+    width:100%;height:auto;margin:12px 0 0;overflow:hidden;display:block;
+  }
+  .hero__photo img{width:100%;height:100%;max-width:100%;object-fit:cover;object-position:50% 0;margin:0}
+  .hero__cta{order:3;flex:0 0 auto;position:relative;z-index:3;margin:-32px 0 0}
+  .hero__cta .btn{min-height:54px;padding:0 26px;font-size:12.5px}
+  .hero__chip{padding:10px 20px;font-size:12px;gap:9px}
+  .hero__title{margin-top:20px;font-size:clamp(28px,10.4vw,44px)}
+  .hero__rule{margin:18px auto 0;max-width:260px}
+  .hero__sub{max-width:none;margin:16px auto 0;font-size:14px;line-height:1.55}
   /* header lockup scales down; the pill keeps its label only where there is room */
   .site-head{padding:10px 12px 0}
   .site-head__bar{height:66px;gap:6px;padding:0 8px}
@@ -801,6 +809,18 @@ body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotat
   .tariff__name{padding-right:58px}
 }
 /* smallest phones: the menu pill drops its label so the bar still fits */
+/* short phones: tighten the vertical rhythm so the button still clears the fold */
+@media (max-width:900px) and (max-height:730px){
+  .hero{padding:78px 0 34px}
+  .hero__chip{padding:8px 16px;font-size:11px}
+  .hero__title{margin-top:14px;font-size:clamp(24px,8.4vw,34px)}
+  .hero__rule{margin:12px auto 0;max-width:200px}
+  .hero__sub{margin-top:12px;font-size:13px;line-height:1.45}
+  .hero__photo{min-height:120px;margin-top:8px}
+  .hero__cta{margin-top:-28px}
+  .hero__cta .btn{min-height:50px;font-size:12px}
+}
+
 @media (max-width:430px){
   .brand__seal{width:32px;height:32px}
   .brand__tag{font-size:8px;letter-spacing:.05em;max-width:162px}
@@ -819,10 +839,22 @@ body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotat
   .brand__tag{font-size:7.5px;letter-spacing:.04em;max-width:128px}
   .lang{margin-left:2px}
   .lang button{padding:4px 3px;font-size:9px}
-  .hero__title{font-size:38px}
+  .hero__title{font-size:28px}
   .slogan{font-size:20px}
   .book__headline{font-size:20px}
   .tariff__name{font-size:19px;padding-right:52px}
+}
+/* short laptops: compress the hero so the CTA still clears the fold */
+@media (min-width:901px) and (max-height:830px){
+  .hero{padding:112px 0 0}
+  .hero__grid{min-height:calc(100vh - 148px)}
+  .hero__chip{padding:11px 22px;font-size:13px}
+  .hero__title{margin-top:22px;font-size:clamp(30px,3.4vw,54px)}
+  .hero__rule{margin-top:20px}
+  .hero__sub{margin-top:18px;font-size:16px}
+  .hero__cta{margin:26px 0 44px}
+  .hero__cta .btn{min-height:58px}
+  .hero__photo{top:30px}
 }
 </style>
 </head>
