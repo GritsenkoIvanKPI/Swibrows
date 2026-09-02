@@ -165,8 +165,8 @@ body.is-scrolled .brand__name{font-size:21px}
   font-size:11px;line-height:1.5;letter-spacing:.17em;text-transform:uppercase;
   color:var(--gold-dk);white-space:normal;max-width:300px;
 }
+.brand__tag--long{display:none}
 .nav{display:none}
-.nav-unused{display:flex;gap:22px;margin-left:auto;align-items:center}
 .nav a{
   font-size:13px;color:var(--ink-soft);position:relative;padding:6px 0;
   transition:color .3s var(--ease);
@@ -219,6 +219,35 @@ body.is-scrolled .burger{height:40px;padding:0 18px;font-size:11px}
 }
 .menu a:hover{color:var(--ink);background:var(--paper)}
 .menu a:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+/* ---------- desktop header: solid bar, name | tagline, inline nav ---------- */
+@media (min-width:901px){
+  body .site-head__shell{
+    background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:var(--shadow-card);
+  }
+  .site-head__bar{height:86px;padding:0 22px;gap:16px}
+  body.is-scrolled .site-head__bar{height:72px}
+  .brand{gap:15px}
+  .brand__seal{width:56px;height:56px}
+  body.is-scrolled .brand__seal{width:48px;height:48px}
+  .brand__name{font-size:25px}
+  body.is-scrolled .brand__name{font-size:22px}
+  .brand__words{flex-direction:row;align-items:center;gap:16px}
+  .brand__tag--short{display:none}
+  .brand__tag--long{
+    display:block;border-left:1px solid var(--line);padding-left:16px;
+    font-size:12px;line-height:1.45;letter-spacing:0;text-transform:none;
+    color:var(--ink-soft);max-width:none;
+  }
+  .lang{margin-left:18px;padding-left:18px;border-left:1px solid var(--line)}
+  .lang button{font-size:12px}
+}
+/* inline nav replaces the pill only where all seven links fit */
+@media (min-width:1240px){
+  .nav{display:flex;gap:14px;margin-left:auto;align-items:center}
+  .nav a{font-size:13px;white-space:nowrap}
+  .burger,.menu{display:none}
+}
+
 /* on wide sheets the links read as columns rather than one sparse stack */
 @media (min-width:901px){
   .menu{display:grid;grid-template-columns:repeat(4,1fr);gap:2px 8px;padding:18px 14px 24px}
@@ -819,12 +848,25 @@ body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotat
         </svg>
       <span class="brand__words">
         <span class="brand__name">Svetlana Swibrows</span>
-        <span class="brand__tag">
+        <span class="brand__tag brand__tag--long">
+          <span class="ru">Мастер и преподаватель<br>по удалению пигмента с 2015 года</span>
+          <span class="fr">Maîtresse et formatrice<br>en détatouage de pigment depuis 2015</span>
+        </span>
+        <span class="brand__tag brand__tag--short">
           <span class="ru">Обучение удалению татуажа</span>
           <span class="fr">Formation au détatouage</span>
         </span>
       </span>
     </a>
+    <nav class="nav" aria-label="main">
+      <a href="#who"><span class="ru">Для кого</span><span class="fr">Pour qui</span></a>
+      <a href="#programme"><span class="ru">Программа</span><span class="fr">Programme</span></a>
+      <a href="#about"><span class="ru">Обо мне</span><span class="fr">À propos</span></a>
+      <a href="#works"><span class="ru">Работы</span><span class="fr">Réalisations</span></a>
+      <a href="#price"><span class="ru">Стоимость</span><span class="fr">Tarifs</span></a>
+      <a href="#faq"><span class="ru">Вопросы</span><span class="fr">FAQ</span></a>
+      <a href="#booking"><span class="ru">Бронирование</span><span class="fr">Réservation</span></a>
+    </nav>
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu">
       <span class="burger__ico" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="ru">Меню</span><span class="fr">Menu</span>
