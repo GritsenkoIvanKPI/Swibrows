@@ -131,7 +131,7 @@ section{position:relative}
   transition:height .4s var(--ease),padding .4s var(--ease);
 }
 .site-head__shell{
-  position:relative;width:100%;max-width:1180px;border-radius:12px;
+  position:relative;width:100%;max-width:var(--container);border-radius:12px;
   background:transparent;box-shadow:none;
   transition:background-color .4s var(--ease),box-shadow .4s var(--ease),border-radius .3s var(--ease);
 }
@@ -224,26 +224,27 @@ body.is-scrolled .burger{height:40px;padding:0 18px;font-size:11px}
   body .site-head__shell{
     background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:var(--shadow-card);
   }
-  .site-head__bar{height:86px;padding:0 22px;gap:16px}
+  .site-head{padding:14px 0 0}
+  .site-head__bar{height:86px;padding:0 24px;gap:14px}
   body.is-scrolled .site-head__bar{height:72px}
   .brand{gap:15px}
   .brand__seal{width:56px;height:56px}
   body.is-scrolled .brand__seal{width:48px;height:48px}
   .brand__name{font-size:25px}
   body.is-scrolled .brand__name{font-size:22px}
-  .brand__words{flex-direction:row;align-items:center;gap:16px}
+  .brand__words{flex-direction:row;align-items:center;gap:14px}
   .brand__tag--short{display:none}
   .brand__tag--long{
-    display:block;border-left:1px solid var(--line);padding-left:16px;
+    display:block;border-left:1px solid var(--line);padding-left:14px;
     font-size:12px;line-height:1.45;letter-spacing:0;text-transform:none;
     color:var(--ink-soft);max-width:none;
   }
-  .lang{margin-left:18px;padding-left:18px;border-left:1px solid var(--line)}
+  .lang{margin-left:12px;padding-left:12px;border-left:1px solid var(--line)}
   .lang button{font-size:12px}
 }
 /* inline nav replaces the pill only where all seven links fit */
 @media (min-width:1240px){
-  .nav{display:flex;gap:14px;margin-left:auto;align-items:center}
+  .nav{display:flex;gap:12px;margin-left:auto;align-items:center}
   .nav a{font-size:13px;white-space:nowrap}
   .burger,.menu{display:none}
 }
@@ -295,7 +296,7 @@ body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotat
 
 /* ---------- hero ---------- */
 .hero{padding:172px 0 0;overflow:hidden}
-.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:770px}
+.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:880px}
 .hero__copy{position:relative;z-index:2;max-width:625px;padding:8px 0 0}
 .chip{
   display:inline-flex;align-items:center;gap:9px;background:#fff;border-radius:999px;
@@ -328,7 +329,7 @@ body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotat
 .hero__cta .btn{min-height:66px;padding:0 52px;font-size:14px;letter-spacing:.13em}
 /* cut-out figure bleeds to the right edge and is cropped by the section */
 .hero__photo{
-  position:absolute;right:calc(50% - 50vw);bottom:0;top:96px;z-index:1;pointer-events:none;
+  position:absolute;right:0;bottom:0;top:44px;z-index:1;pointer-events:none;
   width:min(50vw,760px);overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-end;
 }
 .hero__photo img{height:100%;width:auto;max-width:none;display:block;margin-bottom:-2px}
