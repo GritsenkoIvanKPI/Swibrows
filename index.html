@@ -126,15 +126,23 @@ section{position:relative}
   display:flex;justify-content:center;padding:14px 16px 0;
 }
 .site-head__bar{
-  width:100%;max-width:1180px;height:76px;border-radius:12px;
+  width:100%;height:76px;
   display:flex;align-items:center;gap:28px;padding:0 12px;
+  transition:height .4s var(--ease),padding .4s var(--ease);
+}
+.site-head__shell{
+  position:relative;width:100%;max-width:1180px;border-radius:12px;
   background:transparent;box-shadow:none;
-  transition:background-color .4s var(--ease),box-shadow .4s var(--ease),height .4s var(--ease),padding .4s var(--ease);
+  transition:background-color .4s var(--ease),box-shadow .4s var(--ease),border-radius .3s var(--ease);
 }
-body.is-scrolled .site-head__bar{
-  height:60px;padding:0 20px;background:rgba(255,255,255,.94);
-  backdrop-filter:blur(10px);box-shadow:var(--shadow-card);
+body.is-scrolled .site-head__shell{
+  background:rgba(255,255,255,.94);backdrop-filter:blur(10px);box-shadow:var(--shadow-card);
 }
+body.is-menu-open .site-head__shell{
+  background:rgba(255,255,255,.98);backdrop-filter:blur(10px);
+  box-shadow:var(--shadow-float);border-radius:12px 12px 0 0;
+}
+body.is-scrolled .site-head__bar{height:60px;padding:0 20px}
 /* logo lockup: seal + name + tagline */
 .brand{display:flex;align-items:center;gap:14px;flex:0 0 auto}
 .brand__seal{width:54px;height:54px;flex:0 0 auto;transition:width .4s var(--ease),height .4s var(--ease)}
@@ -146,14 +154,15 @@ body.is-scrolled .brand__seal{width:42px;height:42px}
 .brand__seal-mono{
   font-family:var(--t-headline-font);font-size:30px;fill:var(--gold-dk);letter-spacing:.01em;
 }
-.brand__words{display:flex;flex-direction:column;gap:3px;white-space:nowrap}
+.brand__words{display:flex;flex-direction:column;gap:4px}
+.brand__name{white-space:nowrap}
 .brand__name{
   font-family:var(--t-headline-font);font-size:23px;line-height:1;color:var(--ink);
   transition:font-size .4s var(--ease);
 }
 body.is-scrolled .brand__name{font-size:19px}
 .brand__tag{
-  font-size:9.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);
+  font-size:11px;line-height:1.35;color:var(--ink-soft);white-space:normal;max-width:250px;
 }
 .nav{display:none}
 .nav-unused{display:flex;gap:22px;margin-left:auto;align-items:center}
@@ -198,9 +207,9 @@ body.is-scrolled .burger{height:40px;padding:0 18px;font-size:11px}
   transition:transform .35s var(--ease);
 }
 .menu{
-  position:fixed;top:80px;left:16px;right:16px;z-index:99;
-  background:rgba(255,255,255,.97);backdrop-filter:blur(10px);
-  border-radius:10px;box-shadow:var(--shadow-float);padding:8px 0;
+  position:absolute;top:100%;left:0;right:0;z-index:99;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(10px);
+  border-radius:0 0 12px 12px;box-shadow:var(--shadow-float);padding:6px 0 14px;
   opacity:0;visibility:hidden;transform:translateY(-8px);
   transition:opacity .3s var(--ease),transform .35s var(--ease),visibility .3s;
 }
@@ -210,10 +219,14 @@ body.is-scrolled .burger{height:40px;padding:0 18px;font-size:11px}
 }
 .menu a:hover{color:var(--ink);background:var(--paper)}
 .menu a:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+/* on wide sheets the links read as columns rather than one sparse stack */
+@media (min-width:901px){
+  .menu{display:grid;grid-template-columns:repeat(4,1fr);gap:2px 8px;padding:18px 14px 24px}
+  .menu a{border-radius:8px;padding:12px 16px}
+}
 body.is-menu-open .menu{opacity:1;visibility:visible;transform:none}
 body.is-menu-open .burger__ico i:nth-child(1){transform:translateY(2.75px) rotate(45deg)}
 body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rotate(-45deg)}
-@media (min-width:1101px){.menu{display:none}}
 
 /* ---------- buttons ---------- */
 .btn{
@@ -676,18 +689,18 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   .hero__sub{max-width:none;margin-left:auto;margin-right:auto;font-size:15px}
   /* header lockup scales down; the pill keeps its label only where there is room */
   .site-head{padding:10px 12px 0}
-  .site-head__bar{height:62px;gap:10px;padding:0 8px}
-  body.is-scrolled .site-head__bar{height:56px;padding:0 12px}
-  .brand{gap:10px}
-  .brand__seal{width:40px;height:40px}
-  body.is-scrolled .brand__seal{width:36px;height:36px}
-  .brand__name{font-size:17px}
-  body.is-scrolled .brand__name{font-size:16px}
-  .brand__tag{font-size:8px;letter-spacing:.16em}
+  .site-head__bar{height:66px;gap:6px;padding:0 8px}
+  body.is-scrolled .site-head__bar{height:60px;padding:0 10px}
+  .brand{gap:8px}
+  .brand__seal{width:36px;height:36px}
+  body.is-scrolled .brand__seal{width:34px;height:34px}
+  .brand__name{font-size:16px}
+  body.is-scrolled .brand__name{font-size:15px}
+  .brand__tag{font-size:9.5px;line-height:1.32;max-width:178px}
   .burger{height:40px;padding:0 15px;gap:8px;font-size:10.5px;letter-spacing:.1em}
   body.is-scrolled .burger{height:38px;padding:0 14px}
-  .lang{margin-left:8px}
-  .lang button{padding:5px 6px;font-size:11px}
+  .lang{margin-left:4px}
+  .lang button{padding:5px 5px;font-size:10.5px}
   .cards-3{grid-template-columns:1fr;gap:28px;max-width:440px;margin-left:auto;margin-right:auto}
   .pain{grid-template-columns:1fr}
   .pain__card{grid-column:1;margin-right:0;padding:34px 28px;order:2}
@@ -755,18 +768,22 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   .tariff__name{padding-right:58px}
 }
 /* smallest phones: the menu pill drops its label so the bar still fits */
+@media (max-width:430px){
+  .brand__seal{width:34px;height:34px}
+  .brand__tag{font-size:9px;max-width:165px}
+}
 @media (max-width:520px){
   .burger{padding:0 13px;gap:0}
   .burger .ru,.burger .fr{display:none!important}
 }
-@media (max-width:380px){
-  .site-head__bar{padding:0 6px;gap:8px}
-  .brand{gap:8px}
-  .brand__seal{width:34px;height:34px}
-  .brand__name{font-size:14px}
-  .brand__tag{display:none}
-  .lang{margin-left:4px}
-  .lang button{padding:5px 5px;font-size:10px}
+@media (max-width:360px){
+  .site-head__bar{padding:0 5px;gap:4px}
+  .brand{gap:7px}
+  .brand__seal{width:32px;height:32px}
+  .brand__name{font-size:13.5px}
+  .brand__tag{font-size:9px;max-width:130px}
+  .lang{margin-left:2px}
+  .lang button{padding:4px 4px;font-size:9.5px}
   .hero__title{font-size:26px}
   .slogan{font-size:20px}
   .book__headline{font-size:20px}
@@ -778,6 +795,7 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 
 <!-- ============ HEADER ============ -->
 <header class="site-head">
+  <div class="site-head__shell">
   <div class="site-head__bar">
     <a class="brand" href="#top" aria-label="Svetlana Swibrows">
       <svg class="brand__seal" viewBox="0 0 100 100" role="img" aria-label="SWIBROWS">
@@ -796,7 +814,10 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
         </svg>
       <span class="brand__words">
         <span class="brand__name">Svetlana Swibrows</span>
-        <span class="brand__tag"><span class="ru">Удаление пигмента</span><span class="fr">Détatouage de pigment</span></span>
+        <span class="brand__tag">
+          <span class="ru">Мастер и преподаватель<br>по удалению пигмента с 2015 года</span>
+          <span class="fr">Maîtresse et formatrice<br>en détatouage de pigment depuis 2015</span>
+        </span>
       </span>
     </a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu">
@@ -817,6 +838,7 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
     <a href="#faq"><span class="ru">Вопросы</span><span class="fr">FAQ</span></a>
     <a href="#booking"><span class="ru">Бронирование</span><span class="fr">Réservation</span></a>
   </nav>
+  </div>
 </header>
 
 <main id="top">
