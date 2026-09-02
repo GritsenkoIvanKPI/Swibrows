@@ -70,7 +70,7 @@ body{
   background-position:center,center;
   background-repeat:no-repeat,no-repeat;
 }
-.marble--deep{--veil:.58}
+.marble--deep{--veil:.4}
 .marble--pale{--veil:.9}
 /* grain */
 body::after{
@@ -126,7 +126,7 @@ section{position:relative}
   display:flex;justify-content:center;padding:14px 16px 0;
 }
 .site-head__bar{
-  width:100%;height:76px;
+  width:100%;height:96px;
   display:flex;align-items:center;gap:28px;padding:0 12px;
   transition:height .4s var(--ease),padding .4s var(--ease);
 }
@@ -144,9 +144,9 @@ body.is-menu-open .site-head__shell{
 }
 body.is-scrolled .site-head__bar{height:60px;padding:0 20px}
 /* logo lockup: seal + name + tagline */
-.brand{display:flex;align-items:center;gap:14px;flex:0 0 auto}
-.brand__seal{width:54px;height:54px;flex:0 0 auto;transition:width .4s var(--ease),height .4s var(--ease)}
-body.is-scrolled .brand__seal{width:42px;height:42px}
+.brand{display:flex;align-items:center;gap:18px;flex:0 0 auto}
+.brand__seal{width:74px;height:74px;flex:0 0 auto;transition:width .4s var(--ease),height .4s var(--ease)}
+body.is-scrolled .brand__seal{width:46px;height:46px}
 .brand__seal-txt{
   font-family:var(--t-text-font);font-size:7.6px;font-weight:500;letter-spacing:.14em;
   fill:var(--gold-dk);
@@ -154,15 +154,16 @@ body.is-scrolled .brand__seal{width:42px;height:42px}
 .brand__seal-mono{
   font-family:var(--t-headline-font);font-size:30px;fill:var(--gold-dk);letter-spacing:.01em;
 }
-.brand__words{display:flex;flex-direction:column;gap:4px}
+.brand__words{display:flex;flex-direction:column;gap:7px}
 .brand__name{white-space:nowrap}
 .brand__name{
-  font-family:var(--t-headline-font);font-size:23px;line-height:1;color:var(--ink);
+  font-family:var(--t-headline-font);font-size:34px;line-height:1;color:var(--ink);
   transition:font-size .4s var(--ease);
 }
-body.is-scrolled .brand__name{font-size:19px}
+body.is-scrolled .brand__name{font-size:21px}
 .brand__tag{
-  font-size:11px;line-height:1.35;color:var(--ink-soft);white-space:normal;max-width:250px;
+  font-size:11px;line-height:1.5;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--gold-dk);white-space:normal;max-width:300px;
 }
 .nav{display:none}
 .nav-unused{display:flex;gap:22px;margin-left:auto;align-items:center}
@@ -189,10 +190,10 @@ body.is-scrolled .brand__name{font-size:19px}
 .lang button[aria-pressed="true"]{color:var(--gold-dk);background:transparent;border-bottom:1.5px solid var(--gold)}
 
 .burger{
-  display:flex;align-items:center;gap:11px;margin-left:auto;
-  height:48px;padding:0 24px;border-radius:999px;color:var(--gold-dk);
-  background:rgba(255,255,255,.5);border:1.5px solid var(--gold-lt);
-  font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  display:flex;align-items:center;gap:13px;margin-left:auto;
+  height:58px;padding:0 30px;border-radius:999px;color:var(--gold-dk);
+  background:rgba(255,255,255,.5);border:1.6px solid var(--gold-lt);
+  font-size:15px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
   transition:transform .3s var(--ease),background-color .3s var(--ease),border-color .3s var(--ease);
 }
 .burger:hover{background:#fff;border-color:var(--gold)}
@@ -200,11 +201,10 @@ body.is-scrolled .burger{height:40px;padding:0 18px;font-size:11px}
 .burger:active{transform:translateY(1px)}
 .burger:focus-visible{outline:2px solid var(--gold-dk);outline-offset:3px}
 .burger__ico{display:flex;flex-direction:column;gap:4px}
-.burger__ico i:nth-child(1){width:17px}
-.burger__ico i:nth-child(2){width:12px;align-self:flex-start}
+
 .burger__ico i{
-  display:block;width:17px;height:1.6px;background:var(--gold-dk);
-  transition:transform .35s var(--ease);
+  display:block;width:20px;height:1.8px;background:var(--gold-dk);
+  transition:transform .35s var(--ease),opacity .25s var(--ease);
 }
 .menu{
   position:absolute;top:100%;left:0;right:0;z-index:99;
@@ -225,8 +225,9 @@ body.is-scrolled .burger{height:40px;padding:0 18px;font-size:11px}
   .menu a{border-radius:8px;padding:12px 16px}
 }
 body.is-menu-open .menu{opacity:1;visibility:visible;transform:none}
-body.is-menu-open .burger__ico i:nth-child(1){transform:translateY(2.75px) rotate(45deg)}
-body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rotate(-45deg)}
+body.is-menu-open .burger__ico i:nth-child(1){transform:translateY(5.8px) rotate(45deg)}
+body.is-menu-open .burger__ico i:nth-child(2){opacity:0}
+body.is-menu-open .burger__ico i:nth-child(3){transform:translateY(-5.8px) rotate(-45deg)}
 
 /* ---------- buttons ---------- */
 .btn{
@@ -264,8 +265,8 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 }
 
 /* ---------- hero ---------- */
-.hero{padding:150px 0 0;overflow:hidden}
-.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:700px}
+.hero{padding:172px 0 0;overflow:hidden}
+.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:770px}
 .hero__copy{position:relative;z-index:2;max-width:625px;padding:8px 0 0}
 .chip{
   display:inline-flex;align-items:center;gap:9px;background:#fff;border-radius:999px;
@@ -275,18 +276,19 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 /* outlined pill, two lines, heart — as in the mockup */
 .hero__chip{
   display:inline-flex;align-items:center;gap:13px;border-radius:999px;
-  padding:13px 26px;font-size:14px;font-weight:500;line-height:1.35;
+  padding:15px 30px;font-size:15px;font-weight:500;line-height:1.45;
   letter-spacing:.09em;text-transform:uppercase;color:var(--ink);
   background:rgba(255,255,255,.42);border:1.5px solid var(--gold-lt);
 }
-.heart{width:17px;height:17px;fill:var(--red);flex:0 0 auto}
-.hero__title{margin:30px 0 0;font-size:clamp(30px,3.6vw,52px);line-height:1.06;letter-spacing:.005em;overflow-wrap:normal}
+.heart{width:18px;height:18px;fill:var(--red);flex:0 0 auto;vertical-align:-3px;margin-left:6px}
+.hero__title{margin:32px 0 0;font-size:clamp(29px,3.8vw,54px);line-height:.99;letter-spacing:.015em;overflow-wrap:normal}
 .hero__title em,.hero__title b,.hero__title i{font-style:normal;font-weight:400;display:block}
+.hero__title em{font-size:.78em}
 .hero__title b{
   background:linear-gradient(160deg,#E3C583 0%,#C9A44C 42%,#9A7A2C 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.hero__title i{font-size:.52em;letter-spacing:.06em;margin-top:.18em;color:var(--ink)}
+.hero__title i{font-size:.5em;letter-spacing:.05em;margin-top:.2em;color:var(--ink)}
 .hero__rule{display:flex;align-items:center;gap:16px;max-width:430px;margin:34px 0 0}
 .hero__rule::before,.hero__rule::after{
   content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent);
@@ -297,8 +299,8 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 .hero__cta .btn{min-height:66px;padding:0 52px;font-size:14px;letter-spacing:.13em}
 /* cut-out figure bleeds to the right edge and is cropped by the section */
 .hero__photo{
-  position:absolute;right:calc(50% - 50vw);bottom:0;top:76px;z-index:1;pointer-events:none;
-  width:min(46vw,660px);overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-end;
+  position:absolute;right:calc(50% - 50vw);bottom:0;top:96px;z-index:1;pointer-events:none;
+  width:min(50vw,760px);overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-end;
 }
 .hero__photo img{height:100%;width:auto;max-width:none;display:block;margin-bottom:-2px}
 
@@ -696,7 +698,8 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   body.is-scrolled .brand__seal{width:34px;height:34px}
   .brand__name{font-size:16px}
   body.is-scrolled .brand__name{font-size:15px}
-  .brand__tag{font-size:9.5px;line-height:1.32;max-width:178px}
+  .brand__seal{width:34px;height:34px}
+  .brand__tag{font-size:8.5px;line-height:1.4;letter-spacing:.06em;max-width:188px}
   .burger{height:40px;padding:0 15px;gap:8px;font-size:10.5px;letter-spacing:.1em}
   body.is-scrolled .burger{height:38px;padding:0 14px}
   .lang{margin-left:4px}
@@ -769,8 +772,10 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 }
 /* smallest phones: the menu pill drops its label so the bar still fits */
 @media (max-width:430px){
-  .brand__seal{width:34px;height:34px}
-  .brand__tag{font-size:9px;max-width:165px}
+  .brand__seal{width:32px;height:32px}
+  .brand__tag{font-size:8px;letter-spacing:.05em;max-width:162px}
+  .lang{margin-left:2px}
+  .lang button{padding:5px 3px;font-size:10px}
 }
 @media (max-width:520px){
   .burger{padding:0 13px;gap:0}
@@ -781,9 +786,9 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   .brand{gap:7px}
   .brand__seal{width:32px;height:32px}
   .brand__name{font-size:13.5px}
-  .brand__tag{font-size:9px;max-width:130px}
+  .brand__tag{font-size:7.5px;letter-spacing:.04em;max-width:128px}
   .lang{margin-left:2px}
-  .lang button{padding:4px 4px;font-size:9.5px}
+  .lang button{padding:4px 3px;font-size:9px}
   .hero__title{font-size:26px}
   .slogan{font-size:20px}
   .book__headline{font-size:20px}
@@ -821,7 +826,7 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
       </span>
     </a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu">
-      <span class="burger__ico" aria-hidden="true"><i></i><i></i></span>
+      <span class="burger__ico" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="ru">Меню</span><span class="fr">Menu</span>
     </button>
     <div class="lang">
@@ -848,9 +853,8 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   <div class="wrap hero__grid">
     <div class="hero__copy reveal">
       <span class="hero__chip">
-        <span class="ru">Мы провели больше<br>6000 процедур удаления</span>
-        <span class="fr">Nous avons réalisé plus de<br>6 000 procédures de détatouage</span>
-        <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.9-7.5-10.4A4.6 4.6 0 0 1 12 7.6a4.6 4.6 0 0 1 7.5 3A11.9 11.9 0 0 1 12 21Z"/></svg>
+        <span class="ru">Мы провели больше<br>6000 процедур удаления <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.9-7.5-10.4A4.6 4.6 0 0 1 12 7.6a4.6 4.6 0 0 1 7.5 3A11.9 11.9 0 0 1 12 21Z"/></svg></span>
+        <span class="fr">Nous avons réalisé plus de<br>6 000 procédures de détatouage <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.9-7.5-10.4A4.6 4.6 0 0 1 12 7.6a4.6 4.6 0 0 1 7.5 3A11.9 11.9 0 0 1 12 21Z"/></svg></span>
       </span>
       <h1 class="h1 hero__title">
         <span class="ru"><em>Больше уверенности.</em> <b>Больше востребованности.</b> <i>Больше дохода</i></span>
