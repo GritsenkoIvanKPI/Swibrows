@@ -2,8 +2,10 @@ node_modules/
 temporary screenshots/
 .DS_Store
 
-# Design/reference material not used by the live site
+# Design references and scratch material — not part of the delivered site
+new try/
 desktop.png
 mobile.png
 marinabond.ru_.png
+example_.png
 photo actor/

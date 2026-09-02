@@ -1,157 +1,1601 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru" data-lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Swibrows · Institut de&nbsp;beauté &amp; formation à&nbsp;Saint-Germain-en-Laye</title>
-<link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SWIBROWS — курс по удалению пигмента</title>
+<meta name="description" content="Курс по удалению пигмента от Светланы SWIBROWS. Мастер и преподаватель по удалению пигмента с 2015 года.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23B4913C'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23fff' text-anchor='middle'%3ESW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  html:not([data-lang="fr"]) [data-fr] { display: none !important; }
-  html[data-lang="fr"] [data-ru] { display: none !important; }
+/* ============================================================
+   SWIBROWS — course landing
+   Headline font var kept in the shape supplied by the client CSS;
+   Playfair Display leads the stack because Viaoda Libre ships no
+   Cyrillic subset and RU/FR must render in one typeface.
+   ============================================================ */
+:root{
+  --t-headline-font:'Playfair Display','Viaoda Libre',Georgia,serif;
+  --t-text-font:'Inter Tight',Arial,sans-serif;
 
-  .welcome-hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+  --gold:#b4913c;
+  --gold-dk:#8d6f27;
+  --gold-lt:#d9c089;
+  --gold-pale:#f2e8d2;
+  --gold-wash:#f8f1e1;
 
-  .welcome-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-block: var(--space-lg);
-  }
+  --ink:#455151;
+  --ink-soft:#6f7a79;
+  --ink-faint:#98a1a0;
+  --line:#e5e1d8;
+  --paper:#fbfaf7;
 
-  .welcome-logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-  }
+  --shadow-card:0 1px 2px rgba(69,81,81,.04),0 10px 30px -12px rgba(69,81,81,.14);
+  --shadow-float:0 2px 6px rgba(69,81,81,.05),0 22px 48px -18px rgba(69,81,81,.22);
+  --shadow-gold:0 2px 6px rgba(141,111,39,.18),0 14px 30px -12px rgba(141,111,39,.38);
 
-  .welcome-logo span {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    font-weight: 500;
-  }
+  --container:1152px;
+  --s-1:8px; --s-2:16px; --s-3:24px; --s-4:32px; --s-5:48px;
+  --s-6:64px; --s-7:88px; --s-8:120px;
 
-  .welcome-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--space-xl);
-    padding-block: var(--space-xl);
-  }
+  --ease:cubic-bezier(.22,1,.36,1);
+}
 
-  .welcome-intro {
-    max-width: 900px;
-    margin-inline: auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-sm);
-  }
+*,*::before,*::after{box-sizing:border-box}
+/* clip, not hidden: no horizontal scroll container is created, so the page
+   cannot be panned sideways on touch devices (hidden is the legacy fallback) */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:96px;overflow-x:hidden;overflow-x:clip}
+body{
+  margin:0;
+  font-family:var(--t-text-font);
+  font-size:16px;
+  line-height:1.7;
+  color:var(--ink);
+  background:#f7f6f3;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  overflow-x:clip;
+  max-width:100%;
+}
+/* marble is painted per band so its scale stays constant down the page */
+.marble{
+  --veil:.78;
+  background-image:
+    linear-gradient(rgba(255,255,255,var(--veil)),rgba(255,255,255,var(--veil))),
+    url("assets/marble.jpg");
+  background-size:auto,cover;
+  background-position:center,center;
+  background-repeat:no-repeat,no-repeat;
+}
+.marble--deep{--veil:.58}
+.marble--pale{--veil:.9}
+/* grain */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.05;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0}
+ul{list-style:none;padding:0}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
-  .welcome-intro .h1 {
-    white-space: nowrap;
-  }
+/* ---------- language toggle ---------- */
+html[data-lang="ru"] .fr{display:none!important}
+html[data-lang="fr"] .ru{display:none!important}
 
-  @media (max-width: 640px) {
-    .welcome-intro .h1 {
-      white-space: normal;
-    }
-  }
+/* ---------- typography ---------- */
+.h1,.h2,.h3{
+  overflow-wrap:break-word;
+  font-family:var(--t-headline-font);
+  font-weight:400;
+  color:var(--ink);
+  letter-spacing:-.01em;
+}
+.h1{font-size:clamp(28px,2.95vw,42px);line-height:1.1;text-transform:uppercase;letter-spacing:.005em}
+.h2{font-size:clamp(27px,3.7vw,53px);line-height:1.14;text-transform:uppercase;text-align:center;letter-spacing:.01em;text-wrap:balance}
+.h3{font-size:clamp(20px,2vw,27px);line-height:1.25;text-transform:uppercase;letter-spacing:.02em}
+.sub{font-size:16px;line-height:1.65;color:var(--ink-soft);text-align:center;max-width:760px;margin:22px auto 0}
+.sub--lg{font-size:19px;line-height:1.6;max-width:840px}
+.eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);
+}
+strong,b{font-weight:600;color:var(--ink)}
 
-  .welcome-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-block: var(--space-lg);
-    border-top: 1px solid var(--line);
-    font-size: 0.85rem;
-    color: var(--ink-faint);
-    flex-wrap: wrap;
-    gap: var(--space-sm);
+/* ---------- structure ---------- */
+.wrap{max-width:var(--container);margin:0 auto;padding:0 24px}
+section{position:relative}
+.band{padding:var(--s-7) 0}
+.band--tight{padding:var(--s-6) 0}
+
+.divider{
+  position:relative;z-index:3;height:1px;background:linear-gradient(90deg,transparent,var(--line) 12%,var(--line) 88%,transparent);
+}
+.divider span{
+  position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-5px 0 0 -5px;
+  background:var(--ink);transform:rotate(45deg);
+}
+.h2-dot{display:block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin:26px auto 0}
+
+/* ---------- header ---------- */
+.site-head{
+  position:fixed;top:12px;left:0;right:0;z-index:100;
+  display:flex;justify-content:center;padding:0 16px;
+}
+.site-head__bar{
+  width:100%;max-width:1180px;height:60px;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);border-radius:10px;box-shadow:var(--shadow-card);
+  display:flex;align-items:center;gap:28px;padding:0 26px;
+}
+.brand{display:flex;align-items:baseline;gap:12px;flex:0 0 auto}
+.brand__mark{
+  font-family:var(--t-headline-font);font-size:19px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink);white-space:nowrap;
+}
+.brand__mark b{color:var(--gold-dk);font-weight:400}
+.nav{display:flex;gap:22px;margin-left:auto;align-items:center}
+.nav a{
+  font-size:13px;color:var(--ink-soft);position:relative;padding:6px 0;
+  transition:color .3s var(--ease);
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{transform:scaleX(1)}
+.nav a:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}
+.nav a:active{transform:translateY(1px)}
+.lang{display:flex;align-items:center;gap:2px;flex:0 0 auto;border-left:1px solid var(--line);padding-left:20px}
+.lang button{
+  font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--ink-faint);padding:5px 8px;border-radius:5px;
+  transition:color .3s var(--ease),background-color .3s var(--ease);
+}
+.lang button:hover{color:var(--ink)}
+.lang button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.lang button:active{transform:translateY(1px)}
+.lang button[aria-pressed="true"]{color:#fff;background:var(--gold-dk)}
+
+.burger{
+  display:none;align-items:center;gap:9px;margin-left:auto;
+  height:38px;padding:0 17px;border-radius:999px;color:#fff;
+  background:linear-gradient(135deg,#cdab5c 0%,#b4913c 52%,#9a7a2c 100%);
+  font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:var(--shadow-gold);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.burger:active{transform:translateY(1px)}
+.burger:focus-visible{outline:2px solid var(--gold-dk);outline-offset:3px}
+.burger__ico{display:flex;flex-direction:column;gap:4px}
+.burger__ico i{
+  display:block;width:15px;height:1.5px;background:#fff;
+  transition:transform .35s var(--ease);
+}
+.menu{
+  position:fixed;top:80px;left:16px;right:16px;z-index:99;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(10px);
+  border-radius:10px;box-shadow:var(--shadow-float);padding:8px 0;
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:opacity .3s var(--ease),transform .35s var(--ease),visibility .3s;
+}
+.menu a{
+  display:block;padding:13px 24px;font-size:15px;color:var(--ink-soft);
+  transition:color .3s var(--ease),background-color .3s var(--ease);
+}
+.menu a:hover{color:var(--ink);background:var(--paper)}
+.menu a:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+body.is-menu-open .menu{opacity:1;visibility:visible;transform:none}
+body.is-menu-open .burger__ico i:nth-child(1){transform:translateY(2.75px) rotate(45deg)}
+body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rotate(-45deg)}
+@media (min-width:1101px){.menu{display:none}}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:58px;padding:0 42px;border-radius:999px;
+  font-size:13px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),opacity .35s var(--ease);
+  will-change:transform;
+}
+.btn:focus-visible{outline:2px solid var(--gold-dk);outline-offset:4px}
+.btn--gold{
+  color:#fff;background:linear-gradient(135deg,#cdab5c 0%,#b4913c 52%,#9a7a2c 100%);
+  box-shadow:var(--shadow-gold);
+}
+.btn--gold:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(141,111,39,.2),0 20px 38px -14px rgba(141,111,39,.5)}
+.btn--gold:active{transform:translateY(0)}
+.btn--ghost{
+  color:var(--ink);background:rgba(255,255,255,.9);border:1px solid var(--gold-lt);
+  box-shadow:var(--shadow-card);
+}
+.btn--ghost:hover{transform:translateY(-2px);box-shadow:var(--shadow-float)}
+.btn--ghost:active{transform:translateY(0)}
+.btn-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:var(--s-5)}
+.btn-row--lg{gap:24px;margin-top:var(--s-6)}
+.btn-row--lg .btn{min-height:68px;padding:0 54px;font-size:14px;letter-spacing:.13em}
+
+/* ---------- feathered photos ---------- */
+.feather{
+  -webkit-mask-image:radial-gradient(ellipse 70% 72% at 50% 46%,#000 38%,rgba(0,0,0,.6) 64%,transparent 82%);
+  mask-image:radial-gradient(ellipse 70% 72% at 50% 46%,#000 38%,rgba(0,0,0,.6) 64%,transparent 82%);
+}
+.feather--wide{
+  -webkit-mask-image:radial-gradient(ellipse 72% 96% at 50% 50%,#000 40%,rgba(0,0,0,.6) 66%,transparent 84%);
+  mask-image:radial-gradient(ellipse 72% 96% at 50% 50%,#000 40%,rgba(0,0,0,.6) 66%,transparent 84%);
+}
+
+/* ---------- hero ---------- */
+.hero{padding:128px 0 0;overflow:hidden}
+.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:540px}
+.hero__copy{position:relative;z-index:2;max-width:670px;padding:20px 0 0}
+.hero__chip,.chip{
+  display:inline-flex;align-items:center;gap:9px;background:#fff;border-radius:999px;
+  padding:8px 18px;font-size:12px;color:var(--ink-soft);box-shadow:var(--shadow-card);
+}
+.hero__chip i,.chip i{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+.hero h1{margin:26px 0 0}
+.hero__sub{margin-top:22px;font-size:16px;color:var(--ink-soft);max-width:490px}
+.hero__cta{position:relative;z-index:2;margin:34px 0 76px}
+/* cut-out figure sits on the marble and is cropped by the section edge */
+.hero__photo{
+  position:absolute;right:0;bottom:0;z-index:1;pointer-events:none;
+  width:min(47%,505px);height:540px;overflow:hidden;
+}
+.hero__photo img{width:100%;height:auto;display:block}
+
+/* ---------- cards: who ---------- */
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:var(--s-6)}
+.card{
+  background:#fff;border-radius:12px;padding:16px 16px 30px;box-shadow:var(--shadow-card);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-float)}
+.card__media{position:relative;background:#f4f2ee;border-radius:8px}
+.card__media img{width:100%;height:267px;object-fit:cover;border-radius:8px}
+.card__media--feather img{
+  -webkit-mask-image:radial-gradient(ellipse 66% 88% at 50% 44%,#000 42%,rgba(0,0,0,.6) 68%,transparent 86%);
+  mask-image:radial-gradient(ellipse 66% 88% at 50% 44%,#000 42%,rgba(0,0,0,.6) 68%,transparent 86%);
+}
+.card__num{
+  position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);
+  width:23px;height:23px;border-radius:50%;background:var(--gold);color:#fff;
+  font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 10px rgba(141,111,39,.35);
+}
+.card__body{margin-top:30px;text-align:center;font-size:15px;line-height:1.55;color:var(--ink-soft)}
+
+/* ---------- pain ---------- */
+.pain{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;margin-top:var(--s-6)}
+.pain__card{
+  grid-column:1/2;background:rgba(255,255,255,.92);border-radius:12px;
+  padding:52px 96px 52px 52px;margin-right:-72px;box-shadow:var(--shadow-card);
+  align-self:center;position:relative;z-index:1;
+}
+.pain__list{display:grid;gap:22px;border-left:1px solid var(--gold-lt);padding-left:26px}
+.pain__list li{position:relative;font-size:15px;line-height:1.6;color:var(--ink-soft)}
+.pain__list li::before{
+  content:"";position:absolute;left:-31px;top:9px;width:11px;height:11px;border-radius:50%;
+  background:#fff;border:2px solid var(--gold);box-shadow:0 0 0 3px rgba(255,255,255,.9);
+}
+.pain__card .btn{margin-top:36px}
+.pain__photo{
+  grid-column:2/3;position:relative;z-index:2;border-radius:12px;overflow:hidden;
+  box-shadow:var(--shadow-float);
+}
+.pain__photo img{width:100%;height:100%;min-height:440px;object-fit:cover;object-position:50% 42%}
+.pain__photo::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(28,34,34,.34),rgba(28,34,34,0) 52%);
+}
+
+/* ---------- floating-card stage ---------- */
+.stage{position:relative;margin-top:var(--s-6);min-height:772px}
+.stage__photo{
+  position:absolute;left:50%;top:0;transform:translateX(-50%);
+  width:546px;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-float);
+}
+.stage__photo img{width:100%;height:693px;object-fit:cover;object-position:50% 50%}
+.float{
+  position:absolute;z-index:2;width:350px;background:#fff;border-radius:12px;
+  padding:34px 30px 28px;box-shadow:var(--shadow-float);
+  font-size:15px;line-height:1.55;color:var(--ink);text-align:center;
+}
+.float i{
+  position:absolute;left:50%;top:-22px;transform:translateX(-50%);
+  width:44px;height:44px;border-radius:12px;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 18px rgba(141,111,39,.3);
+}
+.float i svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.float--a{left:0;top:49px}
+.float--b{right:0;top:49px}
+.float--c{left:0;top:263px}
+.float--d{right:0;top:263px}
+.float--e{left:50%;transform:translateX(-50%);top:625px;width:354px}
+.stage--tall{min-height:756px}
+.stage--tall .stage__photo img{height:672px}
+.stage--tall .float--a{left:0;top:20px}
+.stage--tall .float--b{right:0;top:20px}
+.stage--tall .float--c{left:0;top:262px}
+.stage--tall .float--d{right:0;top:262px}
+.stage--tall .float--e{top:540px}
+
+.slogan{
+  font-family:var(--t-headline-font);font-size:clamp(22px,3.1vw,44px);line-height:1.22;
+  text-transform:uppercase;text-align:center;color:var(--ink);margin:var(--s-6) auto 0;max-width:980px;
+  letter-spacing:.01em;text-wrap:balance;
+}
+.slogan::before{
+  content:"";display:block;width:9px;height:9px;background:var(--gold);
+  transform:rotate(45deg);margin:0 auto var(--s-4);
+}
+.slogan em{font-style:normal;color:var(--gold-dk)}
+
+/* ---------- programme / price format cards ---------- */
+.formats{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:var(--s-5);max-width:880px;margin-left:auto;margin-right:auto}
+.format{
+  background:#fff;border-radius:12px;padding:52px 40px;text-align:center;box-shadow:var(--shadow-card);
+  border-top:2px solid var(--gold-lt);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.format:hover{transform:translateY(-4px);box-shadow:var(--shadow-float)}
+.format__name{font-family:var(--t-headline-font);font-size:27px;text-transform:uppercase;letter-spacing:.04em}
+.format__rule{width:34px;height:1px;background:var(--gold);margin:18px auto}
+.format__tbd{
+  font-size:13px;letter-spacing:.06em;color:var(--ink-faint);
+  border:1px dashed var(--line);border-radius:8px;padding:16px 12px;margin-top:6px;
+}
+.format .btn{margin-top:26px}
+
+/* ---------- about ---------- */
+#about{overflow:hidden}
+.about{position:relative;min-height:640px}
+/* cut-out bleeds off the left edge of the viewport and is cropped by the band */
+.about__photo{
+  position:absolute;left:calc(50% - 50vw);top:-20px;z-index:1;pointer-events:none;
+  width:min(50vw,720px);
+}
+.about__photo img{width:100%;height:auto;display:block}
+.about__body{position:relative;z-index:2;margin-left:52%;max-width:560px}
+.about__name{
+  font-family:var(--t-headline-font);font-size:clamp(34px,3.8vw,56px);line-height:1.06;
+  text-transform:uppercase;letter-spacing:.02em;margin-top:22px;
+}
+.about__lead{
+  margin-top:22px;font-size:15px;font-weight:600;line-height:1.55;
+  text-transform:uppercase;letter-spacing:.015em;color:var(--ink);
+}
+.about__card{
+  margin-top:28px;background:#fff;border-radius:12px;padding:30px 32px;box-shadow:var(--shadow-card);
+}
+.list-gold{display:grid;gap:9px}
+.list-gold li{position:relative;padding-left:20px;font-size:14px;line-height:1.5;color:var(--ink-soft)}
+.list-gold li::before{
+  content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold);
+}
+.quote{margin-top:34px;position:relative;padding-top:44px}
+.quote::before{
+  content:"\201C";position:absolute;left:-2px;top:-4px;
+  font-family:var(--t-headline-font);font-size:64px;line-height:1;color:var(--gold);
+}
+.quote p{font-size:15px;line-height:1.65;color:var(--ink-soft)}
+.quote p+p{margin-top:18px}
+
+/* ---------- works ---------- */
+.works{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:var(--s-6)}
+.work{
+  flex:0 0 auto;border-radius:10px;overflow:hidden;background:#efece6;
+  box-shadow:var(--shadow-card);position:relative;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.work:hover{transform:translateY(-4px);box-shadow:var(--shadow-float)}
+.work img{height:320px;width:auto;max-width:none}
+.work::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(28,34,34,.22),rgba(28,34,34,0) 45%);
+}
+.ig{
+  display:flex;align-items:center;justify-content:center;gap:10px;margin-top:var(--s-5);
+  font-size:15px;color:var(--ink-soft);
+}
+.ig a{
+  color:var(--gold-dk);font-weight:500;border-bottom:1px solid var(--gold-lt);padding-bottom:2px;
+  transition:color .3s var(--ease),border-color .3s var(--ease);
+}
+.ig a:hover{color:var(--ink);border-color:var(--ink)}
+.ig a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ---------- method 01-05 ---------- */
+.method{display:grid;gap:0;margin-top:var(--s-6)}
+.method__row{
+  display:grid;grid-template-columns:132px 1fr;gap:34px;align-items:start;
+  padding:38px 0;border-top:1px solid var(--line);
+}
+.method__row:last-child{border-bottom:1px solid var(--line)}
+.method__num{
+  font-family:var(--t-headline-font);font-size:64px;line-height:.9;color:transparent;
+  -webkit-text-stroke:1px var(--gold);letter-spacing:.02em;
+}
+.method__body h3{margin-bottom:18px}
+.method__body p{font-size:15px;line-height:1.7;color:var(--ink-soft);max-width:760px}
+.method__body p+p{margin-top:10px}
+
+/* ---------- stat band ---------- */
+
+
+/* ---------- faq ---------- */
+.faq__head{display:flex;align-items:flex-start;justify-content:space-between;gap:56px;flex-wrap:wrap}
+.faq__title{text-align:left;font-size:clamp(34px,5vw,74px);line-height:1}
+.faq__note{display:flex;align-items:center;gap:18px;max-width:440px;padding-top:14px}
+.faq__ava{position:relative;flex:0 0 auto}
+.faq__ava img{width:64px;height:78px;border-radius:22px;object-fit:cover;display:block;box-shadow:var(--shadow-card)}
+.faq__ava::after{
+  content:"";position:absolute;right:-3px;top:3px;width:13px;height:13px;border-radius:50%;
+  background:var(--gold);border:2px solid #fff;
+}
+.faq__note p{font-size:15px;line-height:1.55;color:var(--ink-soft)}
+
+.acc{display:grid;gap:16px;margin-top:var(--s-6)}
+.acc__item{background:var(--gold-wash);border-radius:16px;overflow:hidden}
+.acc__q{
+  width:100%;display:flex;align-items:center;gap:28px;text-align:left;
+  padding:30px 26px 30px 38px;font-size:17px;font-weight:600;line-height:1.4;
+  text-transform:uppercase;letter-spacing:.015em;color:var(--ink);
+  transition:color .3s var(--ease);
+}
+.acc__q:hover{color:var(--gold-dk)}
+.acc__q:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+.acc__q span{flex:1}
+.acc__q em{
+  flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:var(--gold);
+  position:relative;transition:transform .4s var(--ease),background-color .4s var(--ease);
+}
+.acc__q em::before,.acc__q em::after{
+  content:"";position:absolute;left:50%;top:50%;background:#fff;
+  transform:translate(-50%,-50%);
+}
+.acc__q em::before{width:13px;height:1.5px}
+.acc__q em::after{
+  width:1.5px;height:13px;
+  transition:transform .4s var(--ease),opacity .3s var(--ease);
+}
+.acc__q:hover em{background:var(--gold-dk)}
+/* + collapses to a clean minus: the upright bar sweeps flat and fades */
+.acc__item.is-open .acc__q em{background:var(--gold-dk)}
+.acc__item.is-open .acc__q em::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+.acc__a{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .45s var(--ease);
+}
+.acc__item.is-open .acc__a{grid-template-rows:1fr}
+.acc__a>div{overflow:hidden}
+.acc__a p{padding:0 92px 28px 38px;font-size:15px;line-height:1.65;color:var(--ink-soft);text-transform:none}
+.acc__a p+p{padding-top:0;margin-top:-12px}
+.acc__a a{color:var(--gold-dk);white-space:nowrap;border-bottom:1px solid var(--gold-lt);transition:color .3s var(--ease)}
+.acc__a a:hover{color:var(--ink)}
+.acc__a a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ---------- final cta ---------- */
+#cta{overflow:hidden}
+.cta__grid{position:relative;min-height:780px;display:flex;align-items:center}
+/* cut-out bleeds off the right edge of the viewport, mirroring the about block */
+.cta__photo{
+  position:absolute;right:calc(50% - 50vw);top:-20px;z-index:1;pointer-events:none;
+  width:min(46vw,660px);
+}
+.cta__photo img{width:100%;height:auto;display:block}
+.cta__body{position:relative;z-index:2;max-width:560px;padding:20px 0 40px}
+.cta__title{text-align:left;font-size:clamp(32px,3.9vw,56px);line-height:1.06;margin-top:24px}
+.cta__lead{margin-top:26px;font-size:16px;line-height:1.65;color:var(--ink-soft);max-width:490px}
+.cta__act{margin-top:38px}
+
+/* ---------- booking ---------- */
+.book{text-align:center}
+.book__ava{position:relative;display:inline-block;margin-bottom:34px}
+.book__ava img{width:112px;height:137px;border-radius:30px;object-fit:cover;display:block;box-shadow:var(--shadow-float)}
+.book__ava em{
+  position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);
+  width:30px;height:30px;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(141,111,39,.32);
+}
+.book__ava em svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.book__card{
+  position:relative;max-width:620px;margin:var(--s-6) auto 0;
+  background:#fff;border-radius:14px;padding:44px 48px 38px;box-shadow:var(--shadow-card);
+}
+.book__card i{
+  position:absolute;left:50%;top:-22px;transform:translateX(-50%);
+  width:44px;height:44px;border-radius:12px;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(141,111,39,.3);
+}
+.book__card i svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.book__card p{
+  font-size:15px;line-height:1.6;text-transform:uppercase;letter-spacing:.02em;color:var(--ink-soft);
+}
+.book__card strong{display:block;margin-top:2px}
+.rule{position:relative;height:1px;margin:var(--s-6) 0;background:linear-gradient(90deg,transparent,var(--line) 14%,var(--line) 86%,transparent)}
+.rule span{
+  position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-4px 0 0 -4px;
+  background:var(--gold);transform:rotate(45deg);
+}
+.book__headline{
+  font-family:var(--t-headline-font);font-size:clamp(22px,2.6vw,38px);line-height:1.24;
+  text-transform:uppercase;letter-spacing:.01em;color:var(--ink);max-width:900px;margin:0 auto;
+  text-wrap:balance;
+}
+.book__act{margin-top:var(--s-5)}
+.h2--accent{color:var(--gold-dk)}
+
+/* ВАЖНО — three white cards, dot badge on the top edge */
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:var(--s-6)}
+.note{
+  position:relative;background:#fff;border-radius:14px;padding:44px 30px 34px;
+  box-shadow:var(--shadow-card);text-align:center;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.note:hover{transform:translateY(-4px);box-shadow:var(--shadow-float)}
+.note i{
+  position:absolute;left:50%;top:24px;transform:translateX(-50%);
+  width:15px;height:15px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 4px var(--gold-pale);
+}
+.note p{font-size:15px;line-height:1.6;color:var(--ink-soft)}
+.note strong{display:block;margin-top:8px}
+
+/* ЦЕНЫ — card grid with numbered badges */
+.tariffs__title{margin-top:var(--s-8)}
+.tariffs{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:var(--s-6)}
+.tariff{
+  min-width:0;position:relative;background:#fff;border-radius:14px;padding:38px 40px 34px;
+  box-shadow:var(--shadow-card);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+}
+.tariff:hover{transform:translateY(-4px);box-shadow:var(--shadow-float)}
+.tariff__num{
+  position:absolute;right:32px;top:32px;
+  padding:7px 13px;border-radius:9px;background:var(--gold);color:#fff;
+  font-size:12px;font-weight:600;letter-spacing:.06em;
+}
+.tariff__name{
+  font-family:var(--t-headline-font);font-size:clamp(20px,2vw,27px);line-height:1.2;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--ink);padding-right:80px;
+}
+.tariff__desc{margin-top:14px;font-size:15px;line-height:1.6;color:var(--ink-soft)}
+.tariff__desc em{font-style:italic}
+.tariff__price{
+  display:block;margin-top:26px;
+  font-family:var(--t-headline-font);font-size:34px;line-height:1;color:var(--gold-dk);letter-spacing:.01em;
+}
+
+/* ---------- footer ---------- */
+.foot{padding:var(--s-6) 0 var(--s-5);border-top:1px solid var(--line);background:rgba(255,255,255,.7)}
+.foot__grid{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:center}
+.foot .brand__mark{font-size:17px}
+.foot__meta{font-size:13px;color:var(--ink-soft);line-height:1.7}
+.foot__meta a{transition:color .3s var(--ease)}
+.foot__meta a:hover{color:var(--gold-dk)}
+.foot__meta a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.is-visible{opacity:1;transform:none}
+.reveal-stagger>*{opacity:0;transform:translateY(20px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal-stagger.is-visible>*{opacity:1;transform:none}
+.reveal-stagger.is-visible>*:nth-child(1){transition-delay:.05s}
+.reveal-stagger.is-visible>*:nth-child(2){transition-delay:.15s}
+.reveal-stagger.is-visible>*:nth-child(3){transition-delay:.25s}
+.reveal-stagger.is-visible>*:nth-child(4){transition-delay:.35s}
+.reveal-stagger.is-visible>*:nth-child(5){transition-delay:.45s}
+.reveal-stagger.is-visible>*:nth-child(6){transition-delay:.55s}
+.reveal-stagger.is-visible>*:nth-child(7){transition-delay:.6s}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .reveal,.reveal-stagger>*{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .nav{display:none}
+  .burger{display:flex}
+  .hero__grid{gap:16px}
+  .stage{min-height:0}
+  .stage__photo{position:static;transform:none;margin:0 auto;width:min(100%,440px)}
+  .stage__photo img{height:auto}
+  /* cards return to the flow; position:relative keeps each icon anchored to its own card */
+  .stage .float,.stage--tall .float{
+    position:relative;inset:auto;transform:none;width:auto;margin-top:44px;
   }
+  .stage--tall{min-height:0}
+  .stage--tall .stage__photo img{height:auto}
+  .stage__floats{display:grid;grid-template-columns:1fr 1fr;gap:26px 24px;margin-top:10px}
+}
+@media (max-width:900px){
+  .band{padding:var(--s-6) 0}
+  /* the reference leads with the message, then the portrait, button over its lower edge */
+  .h2 br{display:none}
+  .hero{padding:104px 0 34px}
+  .hero__grid{flex-direction:column;align-items:stretch;min-height:0;text-align:center}
+  .hero__copy{order:1;max-width:none;padding:0}
+  .hero__photo{order:2;position:static;width:min(100%,330px);height:auto;margin:16px auto 0}
+  .hero__cta{order:3;position:relative;z-index:3;margin:-40px 0 0}
+  .hero__sub{max-width:none}
+  .cards-3{grid-template-columns:1fr;gap:28px;max-width:440px;margin-left:auto;margin-right:auto}
+  .pain{grid-template-columns:1fr}
+  .pain__card{grid-column:1;margin-right:0;padding:34px 28px;order:2}
+  .pain__photo{grid-column:1;order:1;margin-bottom:-18px}
+  .pain__photo img{min-height:300px}
+  .formats{grid-template-columns:1fr;gap:28px}
+  .book__card{padding:38px 26px 30px}
+  .book__ava img{width:96px;height:118px}
+  .faq__head{gap:24px;justify-content:center}
+  .faq__title{text-align:center;width:100%}
+  .faq__note{padding-top:0;flex-direction:column;text-align:center;gap:14px;margin:0 auto}
+  .acc__q{padding:22px 18px 22px 24px;gap:18px;font-size:15px}
+  .acc__a p{padding:0 24px 24px}
+  .about{min-height:0}
+  .about__photo{position:static;width:min(100%,330px);margin:0 auto 8px}
+  .about__body{margin-left:0;max-width:none;text-align:center}
+  .about__name{margin-top:18px}
+  .about__card,.quote{text-align:left}
+  .cta__grid{min-height:0;flex-direction:column;align-items:stretch}
+  .cta__photo{position:static;width:min(100%,330px);margin:0 auto 8px}
+  .cta__body{max-width:none;padding:0;text-align:center}
+  .cta__title{text-align:center}
+  .cta__lead{max-width:none}
+  .cta__act .btn{width:100%}
+  .work{flex:1 1 calc(50% - 11px)}
+  .work img{width:100%;height:auto}
+  .quote{padding:34px 28px}
+  .method__row{grid-template-columns:1fr;gap:14px;padding:30px 0}
+  .method__num{font-size:48px}
+  .notes,.tariffs{grid-template-columns:1fr;gap:24px}
+  .tariff{padding:30px 26px 28px}
+  .tariff__name{padding-right:64px}
+  .format{padding:38px 26px 34px}
+  .ig{flex-direction:column;gap:6px}
+  .foot__grid{flex-direction:column;text-align:center;gap:18px}
+  .btn{min-height:54px;padding:0 30px;width:100%}
+  .btn-row{flex-direction:column;align-items:stretch}
+  .stage__floats{grid-template-columns:1fr}
+}
+/* tablets: single-column stacking, but without phone-sized photos or full-bleed buttons */
+@media (min-width:521px) and (max-width:900px){
+  .btn{width:auto;min-width:300px}
+  .btn-row{flex-direction:row;justify-content:center}
+  .cta__act .btn,.hero__cta .btn{width:auto}
+  .hero__photo{width:min(100%,420px)}
+  .about__photo,.cta__photo{width:min(100%,400px)}
+  .stage__photo{width:min(100%,480px)}
+  .stage__floats{grid-template-columns:1fr 1fr}
+  .cards-3{max-width:520px}
+  /* 3 notes in 2 columns would orphan the last one — keep them stacked */
+  .notes{grid-template-columns:1fr;max-width:620px;margin-left:auto;margin-right:auto}
+  .tariffs{grid-template-columns:1fr 1fr}
+  .book__card{max-width:620px;margin-left:auto;margin-right:auto}
+  .rules,.faq__note{max-width:620px}
+}
+
+@media (max-width:520px){
+  .wrap{padding:0 18px}
+  .site-head__bar{height:54px;padding:0 14px;gap:12px}
+  .lang{padding-left:12px}
+  .burger{padding:0 14px;gap:8px}
+  .brand__mark{font-size:16px;letter-spacing:.12em}
+  .work{flex:1 1 100%}
+  .tariff{padding:26px 22px 24px}
+  .tariff__name{padding-right:58px}
+}
+/* smallest phones: the menu pill drops its label so the bar still fits */
+@media (max-width:380px){
+  .site-head__bar{padding:0 12px;gap:8px}
+  .brand__mark{font-size:15px;letter-spacing:.1em}
+  .burger{padding:0 13px;gap:0}
+  .burger .ru,.burger .fr{display:none!important}
+  .lang{padding-left:10px}
+  .lang button{padding:5px 6px}
+  .h1{font-size:24px}
+  .slogan{font-size:20px}
+  .book__headline{font-size:20px}
+  .tariff__name{font-size:19px;padding-right:52px}
+}
 </style>
 </head>
 <body>
 
-<div class="marble welcome-hero">
-  <div class="container welcome-top">
-    <div class="welcome-logo">SWIBROWS<span data-ru>Институт красоты</span><span data-fr>Institut de&nbsp;beauté</span></div>
-    <div class="lang-switch" role="group" aria-label="Language">
-      <button type="button" data-set-lang="ru" aria-current="true">RU</button>
-      <button type="button" data-set-lang="fr">FR</button>
+<!-- ============ HEADER ============ -->
+<header class="site-head">
+  <div class="site-head__bar">
+    <a class="brand" href="#top" aria-label="SWIBROWS">
+      <span class="brand__mark">Swi<b>brows</b></span>
+    </a>
+    <nav class="nav" aria-label="main">
+      <a href="#who"><span class="ru">Для кого</span><span class="fr">Pour qui</span></a>
+      <a href="#programme"><span class="ru">Программа</span><span class="fr">Programme</span></a>
+      <a href="#about"><span class="ru">Обо мне</span><span class="fr">À propos</span></a>
+      <a href="#works"><span class="ru">Работы</span><span class="fr">Réalisations</span></a>
+      <a href="#price"><span class="ru">Стоимость</span><span class="fr">Tarifs</span></a>
+      <a href="#faq"><span class="ru">Вопросы</span><span class="fr">FAQ</span></a>
+      <a href="#booking"><span class="ru">Бронирование</span><span class="fr">Réservation</span></a>
+    </nav>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="burger__ico" aria-hidden="true"><i></i><i></i></span>
+      <span class="ru">Меню</span><span class="fr">Menu</span>
+    </button>
+    <div class="lang">
+      <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-set-lang="fr" aria-pressed="false">FR</button>
     </div>
   </div>
+  <nav class="menu" id="menu" aria-label="mobile">
+    <a href="#who"><span class="ru">Для кого</span><span class="fr">Pour qui</span></a>
+    <a href="#programme"><span class="ru">Программа</span><span class="fr">Programme</span></a>
+    <a href="#about"><span class="ru">Обо мне</span><span class="fr">À propos</span></a>
+    <a href="#works"><span class="ru">Работы</span><span class="fr">Réalisations</span></a>
+    <a href="#price"><span class="ru">Стоимость</span><span class="fr">Tarifs</span></a>
+    <a href="#faq"><span class="ru">Вопросы</span><span class="fr">FAQ</span></a>
+    <a href="#booking"><span class="ru">Бронирование</span><span class="fr">Réservation</span></a>
+  </nav>
+</header>
 
-  <div class="container welcome-body">
-    <div class="welcome-intro reveal">
-      <span class="kicker" data-ru>Saint-Germain-en-Laye</span>
-      <span class="kicker" data-fr>Saint-Germain-en-Laye</span>
-      <h1 class="h1" data-ru>Выберите свой&nbsp;путь</h1>
-      <h1 class="h1" data-fr>Choisissez votre&nbsp;parcours</h1>
-      <p class="lede" data-ru>Обучение авторской технике безлазерного удаления пигмента или&nbsp;запись на&nbsp;процедуру в&nbsp;салоне Светланы.</p>
-      <p class="lede" data-fr>Une&nbsp;formation à&nbsp;la&nbsp;technique exclusive de&nbsp;détatouage sans laser ou&nbsp;un&nbsp;rendez-vous dans le&nbsp;salon de&nbsp;Svetlana.</p>
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero marble marble--deep">
+  <div class="wrap hero__grid">
+    <div class="hero__copy reveal">
+      <span class="hero__chip"><i></i>
+        <span class="ru">Мы провели больше 6000 процедур удаления</span>
+        <span class="fr">Nous avons réalisé plus de 6 000 procédures de détatouage</span>
+      </span>
+      <h1 class="h1">
+        <span class="ru">Больше уверенности. <br>Больше востребованности. <br>Больше дохода</span>
+        <span class="fr">Plus de confiance. <br>Plus de demande. <br>Plus de revenus.</span>
+      </h1>
+      <p class="hero__sub">
+        <span class="ru">Мастер и преподаватель по удалению пигмента с 2015 года</span>
+        <span class="fr">Maîtresse et formatrice en détatouage de pigment depuis 2015</span>
+      </p>
+    </div>
+    <div class="hero__cta reveal">
+      <a class="btn btn--gold" href="#price">
+        <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
+      </a>
+    </div>
+    <div class="hero__photo reveal">
+      <img src="assets/hero-cutout.webp" alt="Светлана SWIBROWS" width="1000" height="1553" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ WHO ============ -->
+<section class="band marble" id="who">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Для кого моё обучение:</span>
+      <span class="fr">À qui s’adresse ma formation :</span>
+      <span class="h2-dot"></span>
+    </h2>
+    <div class="cards-3 reveal-stagger">
+      <article class="card">
+        <div class="card__media card__media--feather">
+          <img src="assets/who-1.jpg" alt="">
+          <span class="card__num">1</span>
+        </div>
+        <p class="card__body">
+          <span class="ru"><strong>Опытным мастерам в ПМ</strong>, расширяющим услуги</span>
+          <span class="fr"><strong>Aux praticiennes déjà expérimentées en maquillage permanent</strong>, souhaitant élargir leur offre de services</span>
+        </p>
+      </article>
+      <article class="card">
+        <div class="card__media card__media--feather">
+          <img src="assets/who-2.jpg" alt="">
+          <span class="card__num">2</span>
+        </div>
+        <p class="card__body">
+          <span class="ru"><strong>Мастерам, которым сложно удалять:</strong> оранжевый / жёлтый / зелёный пигмент, вызывает страх при работе с зоной век, работать с рубцовой кожей</span>
+          <span class="fr"><strong>Aux praticiennes qui rencontrent des difficultés</strong> à retirer les pigments orange / jaune / vert, qui appréhendent le travail sur la zone des paupières, ou qui doivent traiter une peau cicatricielle</span>
+        </p>
+      </article>
+      <article class="card">
+        <div class="card__media card__media--feather">
+          <img src="assets/who-3.jpg" alt="">
+          <span class="card__num">3</span>
+        </div>
+        <p class="card__body">
+          <span class="ru"><strong>Новичкам</strong>, которые только начали работать с ПМ или нет опыта в ПМ</span>
+          <span class="fr"><strong>Aux débutantes</strong> qui démarrent tout juste en maquillage permanent ou qui n’ont aucune expérience en la matière</span>
+        </p>
+      </article>
+    </div>
+    <div class="btn-row reveal">
+      <a class="btn btn--gold" href="#price">
+        <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ PAIN ============ -->
+<section class="band marble marble--pale">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Я знаю, с какими сложными <br>случаями вы сталкиваетесь</span>
+      <span class="fr">Je sais à quels cas complexes <br>vous êtes confrontée</span>
+      <span class="h2-dot"></span>
+    </h2>
+    <div class="pain reveal">
+      <div class="pain__card">
+        <ul class="pain__list">
+          <li>
+            <span class="ru">Я — <strong>мастер и тренер по удалению пигмента</strong> с <strong>более чем 10-летним опытом</strong> в профессии.</span>
+            <span class="fr">Je suis <strong>praticienne et formatrice en détatouage de pigment</strong>, avec <strong>plus de 10 ans d’expérience</strong> dans le métier.</span>
+          </li>
+          <li>
+            <span class="ru"><strong>Судья и член жюри международных конференций</strong> по перманентному макияжу, <strong>эксперт по работе со сложными случаями</strong> и <strong>основатель студии SWIBROWS</strong>.</span>
+            <span class="fr"><strong>Juge et membre de jurys lors de conférences internationales</strong> de maquillage permanent, <strong>experte des cas difficiles</strong> et <strong>fondatrice du studio SWIBROWS</strong>.</span>
+          </li>
+          <li>
+            <span class="ru"><strong>Более 10 лет практики</strong>, глубокая экспертиза и знания, которые я передаю мастерам, чтобы они могли <strong>уверенно работать с пигментом</strong>, грамотно решать сложные задачи и получать <strong>прогнозируемый результат</strong>.</span>
+            <span class="fr"><strong>Plus de 10 ans de pratique</strong>, une expertise approfondie et un savoir que je transmets aux praticiennes afin qu’elles puissent <strong>travailler le pigment en toute confiance</strong>, résoudre les cas complexes avec justesse et obtenir un <strong>résultat prévisible</strong>.</span>
+          </li>
+        </ul>
+        <a class="btn btn--gold" href="#price">
+          <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
+        </a>
+      </div>
+      <figure class="pain__photo">
+        <img src="assets/pain.jpg" alt="Светлана SWIBROWS во время процедуры удаления пигмента">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ WHAT CHANGES ============ -->
+<section class="band marble">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Что изменится в вашей <br>работе после этого курса?</span>
+      <span class="fr">Ce qui va changer dans <br>votre pratique après cette formation</span>
+    </h2>
+    <p class="sub reveal">
+      <span class="ru">Я покажу вам, как превратить удаление пигмента в <strong>востребованную и действительно прибыльную услугу</strong>. На курсе вы узнаете, как работать с пигментом эффективно, безопасно для кожи и с красивым прогнозируемым результатом.</span>
+      <span class="fr">Je vous montre comment transformer le détatouage de pigment en <strong>un service recherché et réellement rentable</strong>. Pendant la formation, vous apprendrez à travailler le pigment efficacement, en toute sécurité pour la peau, avec un résultat esthétique et prévisible.</span>
+    </p>
+
+    <p class="eyebrow reveal" style="text-align:center;margin-top:44px">
+      <span class="ru">Вы научитесь</span><span class="fr">Vous apprendrez à</span>
+    </p>
+
+    <div class="stage reveal">
+      <figure class="stage__photo">
+        <img src="assets/change.jpg" alt="Светлана SWIBROWS с профессиональными ремуверами">
+      </figure>
+      <div class="stage__floats">
+        <div class="float float--a">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></i>
+          <span class="ru">правильно подбирать технику работы под конкретный случай</span>
+          <span class="fr">choisir la technique adaptée à chaque cas</span>
+        </div>
+        <div class="float float--b">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.6"/></svg></i>
+          <span class="ru">понимать, как работать с разными видами и глубиной пигмента</span>
+          <span class="fr">comprendre comment traiter les différents types et profondeurs de pigment</span>
+        </div>
+        <div class="float float--c">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10Z"/></svg></i>
+          <span class="ru">добиваться результата без лишнего травмирования кожи</span>
+          <span class="fr">obtenir un résultat sans traumatiser inutilement la peau</span>
+        </div>
+        <div class="float float--d">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v9l5 3"/><circle cx="12" cy="12" r="9"/></svg></i>
+          <span class="ru">выполнять процедуру быстрее и увереннее</span>
+          <span class="fr">réaliser la procédure plus rapidement et avec plus d’assurance</span>
+        </div>
+        <div class="float float--e">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17V9m6 8V5m6 12v-6m6 6V7"/></svg></i>
+          <span class="ru">предлагать клиентам новую востребованную услугу и увеличивать свой доход</span>
+          <span class="fr">proposer à vos clientes un nouveau service recherché et augmenter vos revenus</span>
+        </div>
+      </div>
     </div>
 
-    <div class="container">
-      <div class="choice reveal-stagger">
-        <a class="choice-card" data-href-ru="course-ru.html" data-href-fr="course-fr.html" href="course-ru.html">
-          <img src="images/svetlana/choice-course.jpg" alt="Svetlana" />
-          <div class="choice-card__body">
-            <span class="choice-card__kicker" data-ru>Обучение</span>
-            <span class="choice-card__kicker" data-fr>Formation</span>
-            <span class="choice-card__title" data-ru>Курс по&nbsp;удалению пигмента</span>
-            <span class="choice-card__title" data-fr>Formation détatouage</span>
-            <span class="choice-card__desc" data-ru>Освойте безопасную безлазерную технику и&nbsp;начните принимать клиентов уже после первого курса.</span>
-            <span class="choice-card__desc" data-fr>Maîtrisez la&nbsp;technique sûre et&nbsp;sans laser, et&nbsp;commencez à&nbsp;recevoir des&nbsp;clientes dès la&nbsp;fin de&nbsp;la&nbsp;formation.</span>
-            <span class="choice-card__cta"><span data-ru>Смотреть курс</span><span data-fr>Voir la&nbsp;formation</span> <span class="arrow">→</span></span>
-          </div>
+    <p class="sub sub--lg reveal" style="margin-top:64px">
+      <span class="ru">Вы не просто получите новые знания — вы получите навык, который сможете сразу применять в работе и монетизировать.</span>
+      <span class="fr">Vous ne repartirez pas seulement avec de nouvelles connaissances : vous repartirez avec une compétence immédiatement applicable et monétisable.</span>
+    </p>
+
+    <p class="slogan reveal">
+      <span class="ru">Больше уверенности. <br><em>Больше востребованности.</em> <br>Больше дохода</span>
+      <span class="fr">Plus de confiance. <br><em>Plus de demande.</em> <br>Plus de revenus.</span>
+    </p>
+
+    <div class="btn-row btn-row--lg reveal">
+      <a class="btn btn--gold" href="#price">
+        <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
+      </a>
+      <a class="btn btn--ghost" href="#programme">
+        <span class="ru">Программа курса</span><span class="fr">Programme de la formation</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ PROGRAMME ============ -->
+<section class="band marble marble--pale" id="programme">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Программа курса</span>
+      <span class="fr">Programme de la formation</span>
+      <span class="h2-dot"></span>
+    </h2>
+    <p class="sub reveal">
+      <span class="ru">Выберите оптимальный для вас формат обучения:</span>
+      <span class="fr">Choisissez le format qui vous convient le mieux :</span>
+    </p>
+    <div class="formats reveal-stagger">
+      <!-- TODO (клиент): наполнить модулями программы -->
+      <article class="format">
+        <h3 class="format__name"><span class="ru">Онлайн</span><span class="fr">En ligne</span></h3>
+        <span class="format__rule"></span>
+        <p class="format__tbd">
+          <span class="ru">Программа уточняется</span><span class="fr">Programme en cours de finalisation</span>
+        </p>
+      </article>
+      <article class="format">
+        <h3 class="format__name"><span class="ru">Оффлайн</span><span class="fr">En présentiel</span></h3>
+        <span class="format__rule"></span>
+        <p class="format__tbd">
+          <span class="ru">Программа уточняется</span><span class="fr">Programme en cours de finalisation</span>
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ ABOUT ============ -->
+<section class="band marble" id="about">
+  <div class="wrap about">
+    <figure class="about__photo" aria-hidden="true">
+      <img src="assets/hero-cutout.webp" alt="" width="1000" height="1553">
+    </figure>
+    <div class="about__body">
+      <span class="chip reveal"><i></i>
+        <span class="ru">Знакомы мы?</span>
+        <span class="fr">Faisons connaissance</span>
+      </span>
+      <h2 class="about__name reveal">
+        <span class="ru">Светлана <br>Swibrows</span>
+        <span class="fr">Svetlana <br>Swibrows</span>
+      </h2>
+      <p class="about__lead reveal">
+        <span class="ru">Эксперт в сфере красоты с 2008 года. Практик, преподаватель и специалист, который делится своим опытом, знаниями и профессиональными техниками.</span>
+        <span class="fr">Experte dans le domaine de la beauté depuis 2008. Praticienne, formatrice et spécialiste qui partage son expérience, son savoir et ses techniques professionnelles.</span>
+      </p>
+      <div class="about__card reveal">
+        <ul class="list-gold">
+          <li>
+            <span class="ru">Основатель студии перманентного макияжа и удаления татуажа SWIBROWS.</span>
+            <span class="fr">Fondatrice du studio de maquillage permanent et de détatouage SWIBROWS.</span>
+          </li>
+          <li>
+            <span class="ru">Мастер, тренер и международный судья.</span>
+            <span class="fr">Praticienne, formatrice et juge international.</span>
+          </li>
+          <li>
+            <span class="ru">Мастер и преподаватель по удалению пигмента с 2016 года.</span>
+            <span class="fr">Praticienne et formatrice en détatouage de pigment depuis 2016.</span>
+          </li>
+          <li>
+            <span class="ru">Преподаватель практического курса по совместному применению техник: лазер + ремувер + усилители + домашний ремувер — в один сеанс.</span>
+            <span class="fr">Formatrice du cours pratique combinant plusieurs techniques : laser + produit de détatouage + activateurs + solution de détatouage à domicile — en une seule séance.</span>
+          </li>
+          <li>
+            <span class="ru">Мастер, тренер и представитель компании CPC.</span>
+            <span class="fr">Praticienne, formatrice et représentante de la marque CPC.</span>
+          </li>
+          <li>
+            <span class="ru">Мастер и преподаватель по работе с ремувером «Зелье».</span>
+            <span class="fr">Praticienne et formatrice sur le produit de détatouage « Zellyo ».</span>
+          </li>
+          <li>
+            <span class="ru">Автор и преподаватель уникального курса по ускоренному удалению пигмента на ремуверах и лазерах.</span>
+            <span class="fr">Auteure et formatrice d’un cours unique de détatouage accéléré, combinant produits et laser.</span>
+          </li>
+        </ul>
+      </div>
+      <blockquote class="quote reveal">
+        <p>
+          <span class="ru">Ко мне часто обращаются клиенты, которые уже успели попробовать разные способы и средства для удаления татуажа, но так и не получили желаемого результата. Иногда пигмент уходит частично, иногда процедура не даёт ожидаемого эффекта — и человек уже просто не знает, к кому обратиться.</span>
+          <span class="fr">Je suis souvent sollicitée par des clientes qui ont déjà essayé différentes méthodes et différents produits pour retirer leur maquillage permanent, sans obtenir le résultat espéré. Parfois le pigment ne part que partiellement, parfois la procédure ne donne pas l’effet attendu — et la personne ne sait plus vers qui se tourner.</span>
+        </p>
+        <p>
+          <span class="ru">Я часто слышу от клиентов: «Кажется, вы — моя последняя надежда». И я очень ценю это доверие. Ведь именно в работе со сложными случаями особенно важно подобрать правильный подход, грамотную технику и индивидуальную тактику удаления.</span>
+          <span class="fr">J’entends souvent mes clientes me dire : « Vous êtes, je crois, mon dernier espoir. » Et je mesure toute la valeur de cette confiance. Car c’est justement dans le traitement des cas complexes qu’il est essentiel de choisir la bonne approche, une technique maîtrisée et une tactique de détatouage véritablement personnalisée.</span>
+        </p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ WORKS ============ -->
+<section class="band marble marble--pale" id="works">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Примеры моих работ <br>по удалению ПМ</span>
+      <span class="fr">Exemples de mes réalisations <br>en détatouage</span>
+      <span class="h2-dot"></span>
+    </h2>
+    <div class="works reveal-stagger">
+      <figure class="work"><img src="assets/work-1.jpg" alt="Результат удаления перманентного макияжа бровей"></figure>
+      <figure class="work"><img src="assets/work-2.jpg" alt="Результат удаления пигмента бровей"></figure>
+      <figure class="work"><img src="assets/work-3.jpg" alt="Результат удаления пигмента бровей"></figure>
+      <figure class="work"><img src="assets/work-4.jpg" alt="Результат удаления пигмента губ"></figure>
+      <figure class="work"><img src="assets/work-5.jpg" alt="Результат удаления пигмента век"></figure>
+      <figure class="work"><img src="assets/work-6.jpg" alt="Удаление веснушек"></figure>
+      <figure class="work"><img src="assets/work-7.jpg" alt="Удаление старого ПМ и отрастание собственных бровей"></figure>
+    </div>
+    <p class="ig reveal">
+      <span class="ru">Больше результатов в моём инстаграме:</span>
+      <span class="fr">Plus de résultats sur mon Instagram :</span>
+      <a href="https://www.instagram.com/detatouage_paris_formation/" target="_blank" rel="noopener noreferrer">Detatouage_paris_formation</a>
+    </p>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ METHOD 01–05 ============ -->
+<section class="band marble">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Работаем на разных ремуверах</span>
+      <span class="fr">Nous travaillons avec différents <br>systèmes de détatouage</span>
+      <span class="h2-dot"></span>
+    </h2>
+    <p class="sub reveal">
+      <span class="ru">Солевые, кислотные, биохимические системы…</span>
+      <span class="fr">Salins, acides, biochimiques…</span>
+    </p>
+    <div class="method reveal-stagger">
+      <article class="method__row">
+        <span class="method__num">01</span>
+        <div class="method__body">
+          <h3 class="h3">
+            <span class="ru">Каждый случай требует индивидуального подхода</span>
+            <span class="fr">Chaque cas requiert une approche individuelle</span>
+          </h3>
+          <p>
+            <span class="ru">Универсальной схемы удаления не существует.</span>
+            <span class="fr">Il n’existe pas de protocole universel de détatouage.</span>
+          </p>
+          <p>
+            <span class="ru">Я покажу, как анализировать конкретный случай и подбирать оптимальную систему и методику работы в зависимости от пигмента, его состояния и особенностей кожи.</span>
+            <span class="fr">Je vous montre comment analyser chaque cas et choisir le système et la méthode les plus adaptés, en fonction du pigment, de son état et des particularités de la peau.</span>
+          </p>
+        </div>
+      </article>
+      <article class="method__row">
+        <span class="method__num">02</span>
+        <div class="method__body">
+          <h3 class="h3">
+            <span class="ru">Знания — основа эффективной работы</span>
+            <span class="fr">Le savoir, fondement d’un travail efficace</span>
+          </h3>
+          <p>
+            <span class="ru">Даже самое современное оборудование и качественные материалы не гарантируют результат сами по себе.</span>
+            <span class="fr">Même le matériel le plus moderne et les produits les plus qualitatifs ne garantissent pas, à eux seuls, le résultat.</span>
+          </p>
+          <p>
+            <span class="ru">Важно понимать принцип действия методов и уметь грамотно применять их на практике. Именно этим знаниям я уделяю особое внимание в обучении.</span>
+            <span class="fr">Il est essentiel de comprendre le principe d’action de chaque méthode et de savoir l’appliquer avec justesse. C’est précisément à ce savoir que j’accorde une attention particulière dans ma formation.</span>
+          </p>
+        </div>
+      </article>
+      <article class="method__row">
+        <span class="method__num">03</span>
+        <div class="method__body">
+          <h3 class="h3">
+            <span class="ru">Эффективность — в правильном сочетании техник</span>
+            <span class="fr">L’efficacité réside dans la bonne combinaison des techniques</span>
+          </h3>
+          <p>
+            <span class="ru">За годы практики я разработала методики, которые позволяют ускорить процесс удаления старого пигмента.</span>
+            <span class="fr">Au fil de mes années de pratique, j’ai développé des méthodes permettant d’accélérer le retrait des pigments anciens.</span>
+          </p>
+          <p>
+            <span class="ru">Комбинация лазера, ремувера и усилителей в определённых случаях позволяет получить результат значительно быстрее, чем при использовании стандартных схем.</span>
+            <span class="fr">La combinaison du laser, du produit de détatouage et des activateurs permet, dans certains cas, d’obtenir un résultat bien plus rapidement qu’avec les protocoles classiques.</span>
+          </p>
+        </div>
+      </article>
+      <article class="method__row">
+        <span class="method__num">04</span>
+        <div class="method__body">
+          <h3 class="h3">
+            <span class="ru">Я знаю, чем работать в каждом случае</span>
+            <span class="fr">Je sais avec quoi travailler, quel que soit le cas</span>
+          </h3>
+          <p>
+            <span class="ru">Я хорошо знакома с особенностями различных производителей и знаю сильные и слабые стороны используемых средств.</span>
+            <span class="fr">Je connais parfaitement les spécificités des différents fabricants, ainsi que les points forts et les limites des produits utilisés.</span>
+          </p>
+          <p>
+            <span class="ru">Поэтому могу помочь мастеру разобраться в инструментах и выбрать те, которые будут наиболее эффективны именно для его работы.</span>
+            <span class="fr">Je peux donc aider chaque praticienne à s’y retrouver parmi les outils disponibles et à choisir ceux qui seront les plus efficaces pour sa pratique.</span>
+          </p>
+        </div>
+      </article>
+      <article class="method__row">
+        <span class="method__num">05</span>
+        <div class="method__body">
+          <h3 class="h3">
+            <span class="ru">Моя цель — дать вам не просто технику, а понимание</span>
+            <span class="fr">Mon objectif : vous transmettre une compréhension, pas seulement une technique</span>
+          </h3>
+          <p>
+            <span class="ru">На обучении я передаю не только готовые схемы, но и логику принятия решений: почему в одном случае работает один метод, а в другом требуется совершенно другой подход.</span>
+            <span class="fr">Pendant la formation, je ne transmets pas uniquement des protocoles tout faits, mais aussi la logique de décision : pourquoi telle méthode fonctionne dans un cas, et pourquoi une approche totalement différente s’impose dans un autre.</span>
+          </p>
+          <p>
+            <span class="ru">Вы научитесь видеть особенности каждого случая и уверенно подбирать тактику удаления.</span>
+            <span class="fr">Vous apprendrez à identifier les particularités de chaque cas et à choisir votre tactique de détatouage en toute confiance.</span>
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ 6000 PROCEDURES + WHY (single stage block) ============ -->
+<section class="band marble marble--deep">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Мы провели больше <br>6000 процедур удаления</span>
+      <span class="fr">Nous avons réalisé plus de <br>6 000 procédures de détatouage</span>
+      <span class="h2-dot"></span>
+    </h2>
+    <p class="sub reveal">
+      <span class="ru">Здесь вы учитесь не просто делать — вы учитесь понимать, выбирать и получать результат.</span>
+      <span class="fr">Ici, vous n’apprenez pas seulement à faire — vous apprenez à comprendre, à choisir et à obtenir un résultat.</span>
+    </p>
+
+    <p class="eyebrow reveal" style="text-align:center;margin-top:44px">
+      <span class="ru">Почему мастера выбирают мои курсы?</span>
+      <span class="fr">Pourquoi les praticiennes choisissent mes formations ?</span>
+    </p>
+
+    <div class="stage stage--tall reveal">
+      <figure class="stage__photo">
+        <img src="assets/stat.jpg" alt="Процедура удаления пигмента в студии SWIBROWS" width="1092" height="1386">
+      </figure>
+      <div class="stage__floats">
+        <div class="float float--a">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v9l5 3"/><circle cx="12" cy="12" r="9"/></svg></i>
+          <span class="ru"><strong>Более 10 лет опыта</strong> в сфере удаления пигмента — передаю не только знания, но и практический опыт, накопленный за годы работы.</span>
+          <span class="fr"><strong>Plus de 10 ans d’expérience</strong> dans le détatouage de pigment — je transmets non seulement des connaissances, mais aussi une expérience pratique accumulée au fil des années.</span>
+        </div>
+        <div class="float float--b">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6.1L12 16.8 6.6 19.7l1.2-6.1L3.3 9.4l6.1-.8Z"/></svg></i>
+          <span class="ru"><strong>Авторская методика удаления</strong> — сочетание лазера, ремувера, усилителей и домашнего ремувера позволяет работать с пигментом разной сложности.</span>
+          <span class="fr"><strong>Une méthode de détatouage exclusive</strong> — la combinaison du laser, du produit de détatouage, des activateurs et de la solution à domicile permet de traiter des pigments de toute complexité.</span>
+        </div>
+        <div class="float float--c">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h12M3 17h7"/></svg></i>
+          <span class="ru"><strong>Учу работать со сложными случаями</strong> — разбираем ситуации, с которыми мастера не смогли справиться стандартными методами.</span>
+          <span class="fr"><strong>J’enseigne le traitement des cas complexes</strong> — nous étudions ensemble des situations que d’autres praticiennes n’ont pas réussi à résoudre avec les méthodes classiques.</span>
+        </div>
+        <div class="float float--d">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></i>
+          <span class="ru"><strong>Практика вместо сухой теории</strong> — показываю свои рабочие алгоритмы, профессиональные приёмы и подход к каждому конкретному случаю.</span>
+          <span class="fr"><strong>De la pratique plutôt que de la théorie aride</strong> — je partage mes propres protocoles de travail, mes techniques professionnelles et mon approche pour chaque cas particulier.</span>
+        </div>
+        <div class="float float--e">
+          <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17V9m6 8V5m6 12v-6m6 6V7"/></svg></i>
+          <span class="ru"><strong>Помогаю мастерам стать сильнее в своей нише</strong> — уверенно работать со сложными клиентами, получать результат и формировать репутацию специалиста, к которому приходят за решением.</span>
+          <span class="fr"><strong>J’aide les praticiennes à se renforcer dans leur spécialité</strong> — pour travailler avec assurance avec des clientes aux cas complexes, obtenir des résultats et bâtir une réputation d’experte vers qui l’on se tourne pour trouver une solution.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ PRICE ============ -->
+<section class="band marble" id="price">
+  <div class="wrap">
+    <h2 class="h2 reveal">
+      <span class="ru">Стоимость участия</span>
+      <span class="fr">Tarifs de participation</span>
+      <span class="h2-dot"></span>
+    </h2>
+    <p class="sub reveal">
+      <span class="ru">Выберите оптимальный для вас формат участия</span>
+      <span class="fr">Choisissez le format de participation qui vous convient le mieux</span>
+    </p>
+    <div class="formats reveal-stagger">
+      <!-- TODO (клиент): подставить реальную стоимость форматов -->
+      <article class="format">
+        <h3 class="format__name"><span class="ru">Онлайн</span><span class="fr">En ligne</span></h3>
+        <span class="format__rule"></span>
+        <p class="format__tbd">
+          <span class="ru">Стоимость уточняется</span><span class="fr">Tarif en cours de finalisation</span>
+        </p>
+        <a class="btn btn--gold" href="#booking">
+          <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
         </a>
-        <a class="choice-card" data-href-ru="salon-ru.html" data-href-fr="salon-fr.html" href="salon-ru.html">
-          <img src="images/svetlana/choice-salon.jpg" alt="Svetlana" />
-          <div class="choice-card__body">
-            <span class="choice-card__kicker" data-ru>Услуги салона</span>
-            <span class="choice-card__kicker" data-fr>Services du&nbsp;salon</span>
-            <span class="choice-card__title" data-ru>Запись к&nbsp;Светлане</span>
-            <span class="choice-card__title" data-fr>Rendez-vous avec Svetlana</span>
-            <span class="choice-card__desc" data-ru>Перманентный макияж, удаление пигмента и&nbsp;уход за&nbsp;лицом в&nbsp;институте красоты Swibrows.</span>
-            <span class="choice-card__desc" data-fr>Maquillage permanent, détatouage et&nbsp;soins du&nbsp;visage à&nbsp;l'institut de&nbsp;beauté Swibrows.</span>
-            <span class="choice-card__cta"><span data-ru>Записаться</span><span data-fr>Prendre rendez-vous</span> <span class="arrow">→</span></span>
-          </div>
+      </article>
+      <article class="format">
+        <h3 class="format__name"><span class="ru">Оффлайн</span><span class="fr">En présentiel</span></h3>
+        <span class="format__rule"></span>
+        <p class="format__tbd">
+          <span class="ru">Стоимость уточняется</span><span class="fr">Tarif en cours de finalisation</span>
+        </p>
+        <a class="btn btn--gold" href="#booking">
+          <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ FAQ ============ -->
+<section class="band marble marble--pale" id="faq">
+  <div class="wrap">
+    <div class="faq__head reveal">
+      <h2 class="h2 faq__title">
+        <span class="ru">Популярные <br>вопросы:</span>
+        <span class="fr">Questions <br>fréquentes</span>
+      </h2>
+      <div class="faq__note">
+        <span class="faq__ava"><img src="assets/faq-avatar.jpg" alt="Светлана SWIBROWS" width="260" height="317"></span>
+        <p>
+          <span class="ru">Подготовила для вас <strong>ответы на популярные вопросы</strong> об участии в курсах</span>
+          <span class="fr">J’ai préparé pour vous <strong>les réponses aux questions les plus fréquentes</strong> sur la participation aux formations</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="acc reveal-stagger">
+      <div class="acc__item">
+        <button class="acc__q" type="button" aria-expanded="false">
+          <span>
+            <span class="ru">Подойдёт ли мне этот курс, если у меня совсем нет опыта в удалении ПМ?</span>
+            <span class="fr">Cette formation est-elle adaptée si je n’ai aucune expérience en détatouage de maquillage permanent ?</span>
+          </span>
+          <em aria-hidden="true"></em>
+        </button>
+        <div class="acc__a"><div><p>
+          <span class="ru">Да. Обучение рассчитано в том числе на новичков, которые только начали работать с ПМ или не имеют опыта в ПМ.</span>
+          <span class="fr">Oui. La formation s’adresse aussi aux débutantes qui démarrent tout juste en maquillage permanent ou qui n’ont aucune expérience en la matière.</span>
+        </p></div></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__q" type="button" aria-expanded="false">
+          <span>
+            <span class="ru">На какой срок даётся доступ к материалам?</span>
+            <span class="fr">Pendant combien de temps l’accès aux supports est-il ouvert ?</span>
+          </span>
+          <em aria-hidden="true"></em>
+        </button>
+        <div class="acc__a"><div><p>
+          <span class="ru">На 3 месяца.</span>
+          <span class="fr">Pendant 3 mois.</span>
+        </p></div></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__q" type="button" aria-expanded="false">
+          <span>
+            <span class="ru">Что будет, если у меня появятся вопросы после завершения курса?</span>
+            <span class="fr">Que se passe-t-il si j’ai des questions après la fin de la formation ?</span>
+          </span>
+          <em aria-hidden="true"></em>
+        </button>
+        <div class="acc__a"><div>
+          <p>
+            <span class="ru">Я всегда остаюсь на связи и готова помочь с любыми вопросами после обучения.</span>
+            <span class="fr">Je reste toujours joignable et prête à vous aider pour toute question après la formation.</span>
+          </p>
+          <p>
+            <span class="ru">Вы можете обратиться ко мне в удобное время и получить рекомендации по конкретным ситуациям, разборы случаев и дополнительную поддержку. Моя цель — ваш уверенный результат в работе.</span>
+            <span class="fr">Vous pouvez me contacter quand vous le souhaitez pour obtenir des recommandations sur des situations précises, des analyses de cas et un accompagnement complémentaire. Mon objectif : votre résultat, en toute confiance.</span>
+          </p>
+        </div></div>
+      </div>
+      <div class="acc__item">
+        <button class="acc__q" type="button" aria-expanded="false">
+          <span>
+            <span class="ru">Выдаётся ли сертификат?</span>
+            <span class="fr">Un certificat est-il délivré ?</span>
+          </span>
+          <em aria-hidden="true"></em>
+        </button>
+        <div class="acc__a"><div>
+          <p>
+            <span class="ru">Да, сертификат предоставляется после успешного прохождения курса. Чтобы получить его, отправьте свои данные на указанный номер: <a href="tel:+33681708676">+33 6 81 70 86 76</a> — ФИО, город, номер телефона.</span>
+            <span class="fr">Oui, le certificat est délivré après avoir suivi la formation avec succès. Pour l’obtenir, envoyez vos informations au numéro indiqué : <a href="tel:+33681708676">+33 6 81 70 86 76</a> — nom et prénom, ville, numéro de téléphone.</span>
+          </p>
+          <p>
+            <span class="ru">Вы получите именной сертификат, подтверждающий ваше обучение.</span>
+            <span class="fr">Vous recevrez un certificat nominatif attestant de votre formation.</span>
+          </p>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="btn-row btn-row--lg reveal">
+      <a class="btn btn--gold" href="#price">
+        <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
+      </a>
+      <a class="btn btn--ghost" href="#programme">
+        <span class="ru">Программа курса</span><span class="fr">Programme de la formation</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span></span></div>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="band cta marble" id="cta">
+  <div class="wrap cta__grid">
+    <figure class="cta__photo" aria-hidden="true">
+      <img src="assets/hero-cutout.webp" alt="" width="1000" height="1553">
+    </figure>
+    <div class="cta__body">
+      <span class="chip reveal"><i></i>
+        <span class="ru">От обучения — к уверенности. От знаний — к результату</span>
+        <span class="fr">De la formation à la confiance. Du savoir au résultat.</span>
+      </span>
+      <h2 class="h2 cta__title reveal">
+        <span class="ru">Начните путь <br>к уверенной <br>работе <br>с клиентами</span>
+        <span class="fr">Engagez-vous sur la voie <br>d’une pratique sereine <br>avec vos clientes</span>
+      </h2>
+      <p class="cta__lead reveal">
+        <span class="ru">Получите <strong>практические знания и рабочие инструменты</strong>, которые помогут уверенно работать даже со сложными случаями и профессионально удалять пигмент любой сложности.</span>
+        <span class="fr">Acquérez des <strong>connaissances pratiques et des outils concrets</strong> qui vous permettront de traiter avec assurance même les cas les plus complexes, et de retirer un pigment de toute difficulté avec professionnalisme.</span>
+      </p>
+      <div class="cta__act reveal">
+        <a class="btn btn--gold" href="#booking">
+          <span class="ru">Записаться на курс</span><span class="fr">S’inscrire à la formation</span>
         </a>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="container welcome-foot">
-    <span data-ru>2 Rue Raymond Gréban, 78100 Saint-Germain-en-Laye</span>
-    <span data-fr>2 Rue Raymond Gréban, 78100 Saint-Germain-en-Laye</span>
-    <span data-ru>Пн–Сб 10:00–20:00</span>
-    <span data-fr>Lun–Sam 10h–20h</span>
+<div class="divider"><span></span></div>
+
+<!-- ============ BOOKING ============ -->
+<section class="band marble marble--pale" id="booking">
+  <div class="wrap book">
+    <span class="book__ava reveal">
+      <img src="assets/faq-avatar.jpg" alt="Светлана SWIBROWS" width="260" height="317">
+      <em aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></em>
+    </span>
+
+    <h2 class="h2 reveal">
+      <span class="ru">Студия Swibrows</span>
+      <span class="fr">Studio Swibrows</span>
+    </h2>
+
+    <div class="book__card reveal">
+      <i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9"/></svg></i>
+      <p>
+        <span class="ru">Для всех клиентов у нас осуществляется запись через <strong>услугу бронирования времени</strong></span>
+        <span class="fr">Toutes nos clientes réservent leur rendez-vous via <strong>un service de réservation de créneau</strong></span>
+      </p>
+    </div>
+
+    <div class="rule reveal"><span></span></div>
+
+    <p class="book__headline reveal">
+      <span class="ru">Стоимость услуги бронирования времени вычитается из цены услуги!</span>
+      <span class="fr">Le montant de la réservation est déduit du prix de la prestation !</span>
+    </p>
+
+    <div class="rule reveal"><span></span></div>
+
+    <div class="book__act reveal">
+      <a class="btn btn--gold" href="tel:+33681708676">
+        <span class="ru">Забронировать время</span><span class="fr">Réserver un créneau</span>
+      </a>
+    </div>
   </div>
-</div>
+</section>
 
-<script src="script.js"></script>
+<div class="divider"><span></span></div>
+
+<!-- ============ IMPORTANT + PRICES ============ -->
+<section class="band marble" id="terms">
+  <div class="wrap">
+    <h2 class="h2 h2--accent reveal">
+      <span class="ru">Важно!</span>
+      <span class="fr">Important !</span>
+    </h2>
+    <div class="notes reveal-stagger">
+      <article class="note">
+        <i aria-hidden="true"></i>
+        <p>
+          <span class="ru">Если запись по услуге бронирования переносите, но более чем за 24 часа — бронирование за вами сохраняется.</span>
+          <span class="fr">Si vous reportez votre rendez-vous réservé plus de 24 heures à l’avance, votre réservation reste valable.</span>
+        </p>
+      </article>
+      <article class="note">
+        <i aria-hidden="true"></i>
+        <p>
+          <span class="ru">Если запись по услуге бронирования переносится, но меньше чем за 24 часа — услуга бронирования считается оказанной.</span>
+          <span class="fr">Si vous reportez votre rendez-vous réservé moins de 24 heures à l’avance, le service de réservation est considéré comme rendu.</span>
+        </p>
+      </article>
+      <article class="note">
+        <i aria-hidden="true"></i>
+        <p>
+          <span class="ru">Перенос возможен 1 раз не позднее 24 ч до времени процедуры. <br><strong>Бронирование возврату не подлежит!</strong></span>
+          <span class="fr">Un report n’est possible qu’une seule fois, au plus tard 24 heures avant l’heure de la procédure. <br><strong>La réservation n’est pas remboursable !</strong></span>
+        </p>
+      </article>
+    </div>
+
+    <h2 class="h2 tariffs__title reveal">
+      <span class="ru">Цены:</span>
+      <span class="fr">Tarifs :</span>
+    </h2>
+    <p class="sub reveal">
+      <span class="ru">Удаление пигмента</span>
+      <span class="fr">Détatouage de pigment</span>
+    </p>
+
+    <div class="tariffs reveal-stagger">
+      <article class="tariff">
+        <span class="tariff__num">#01</span>
+        <h3 class="tariff__name">
+          <span class="ru">Биохимическая система</span>
+          <span class="fr">Système biochimique</span>
+        </h3>
+        <p class="tariff__desc">
+          <span class="ru">Ремувер + усилители + нейтрализатор</span>
+          <span class="fr">Produit de détatouage + activateurs + neutralisant</span>
+        </p>
+        <span class="tariff__price">150 €</span>
+      </article>
+      <article class="tariff">
+        <span class="tariff__num">#02</span>
+        <h3 class="tariff__name">
+          <span class="ru">Ремувер для дома</span>
+          <span class="fr">Détatouage à domicile</span>
+        </h3>
+        <p class="tariff__desc">
+          <span class="ru">Ремувер для выведения пигмента дома</span>
+          <span class="fr">Produit de détatouage à domicile</span>
+        </p>
+        <span class="tariff__price">30 €</span>
+      </article>
+      <article class="tariff">
+        <span class="tariff__num">#03</span>
+        <h3 class="tariff__name">
+          <span class="ru">Лазерный метод</span>
+          <span class="fr">Méthode laser</span>
+        </h3>
+        <span class="tariff__price">100 €</span>
+      </article>
+      <article class="tariff">
+        <span class="tariff__num">#04</span>
+        <h3 class="tariff__name">
+          <span class="ru">Мощный комплекс</span>
+          <span class="fr">Protocole intensif</span>
+        </h3>
+        <p class="tariff__desc">
+          <span class="ru">Лазер + ремувер + усилители + нейтрализатор <em>(заменяет до 3–4 сеансов качественного удаления и выгоднее на 25%)</em></span>
+          <span class="fr">Laser + produit de détatouage + activateurs + neutralisant <em>(remplace jusqu’à 3–4 séances de détatouage classique, avec 25 % d’économie)</em></span>
+        </p>
+        <span class="tariff__price">170 €</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <span class="brand__mark">Swi<b>brows</b></span>
+    <p class="foot__meta">
+      2 Rue Raymond Gréban, 78100 Saint-Germain-en-Laye <br>
+      <a href="tel:+33681708676">+33 6 81 70 86 76</a>
+    </p>
+    <p class="foot__meta">
+      <a href="https://www.instagram.com/detatouage_paris_formation/" target="_blank" rel="noopener noreferrer">Detatouage_paris_formation</a>
+    </p>
+  </div>
+</footer>
+
 <script>
-  const root = document.documentElement;
-  const buttons = document.querySelectorAll("[data-set-lang]");
-  function applyLang(lang) {
+(function(){
+  "use strict";
+
+  /* ---- language ---- */
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem("swibrows-lang"); } catch (e) {}
+  setLang(stored === "fr" || (!stored && (navigator.language || "").toLowerCase().indexOf("fr") === 0) ? "fr" : "ru");
+
+  function setLang(lang){
     root.setAttribute("data-lang", lang);
     root.setAttribute("lang", lang);
-    buttons.forEach((b) => b.setAttribute("aria-current", b.dataset.setLang === lang ? "true" : "false"));
-    document.querySelectorAll("[data-href-ru]").forEach((a) => {
-      a.setAttribute("href", lang === "fr" ? a.dataset.hrefFr : a.dataset.hrefRu);
+    document.querySelectorAll("[data-set-lang]").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.setLang === lang));
+    });
+    try { localStorage.setItem("swibrows-lang", lang); } catch (e) {}
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(function(b){
+    b.addEventListener("click", function(){ setLang(b.dataset.setLang); });
+  });
+
+  /* ---- mobile menu ---- */
+  var burger = document.querySelector(".burger");
+  if (burger) {
+    burger.addEventListener("click", function(){
+      var open = document.body.classList.toggle("is-menu-open");
+      burger.setAttribute("aria-expanded", String(open));
+    });
+    document.querySelectorAll(".menu a").forEach(function(a){
+      a.addEventListener("click", function(){
+        document.body.classList.remove("is-menu-open");
+        burger.setAttribute("aria-expanded", "false");
+      });
+    });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && document.body.classList.contains("is-menu-open")) {
+        document.body.classList.remove("is-menu-open");
+        burger.setAttribute("aria-expanded", "false");
+        burger.focus();
+      }
     });
   }
-  buttons.forEach((b) => b.addEventListener("click", () => applyLang(b.dataset.setLang)));
-  applyLang("ru");
+
+  /* ---- accordion ---- */
+  document.querySelectorAll(".acc__q").forEach(function(q){
+    q.addEventListener("click", function(){
+      var item = q.closest(".acc__item");
+      var open = item.classList.toggle("is-open");
+      q.setAttribute("aria-expanded", String(open));
+    });
+  });
+
+  /* ---- reveal on scroll ---- */
+  var targets = document.querySelectorAll(".reveal, .reveal-stagger");
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach(function(t){ t.classList.add("is-visible"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
 </script>
 </body>
 </html>
