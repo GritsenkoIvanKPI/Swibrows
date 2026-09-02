@@ -24,6 +24,7 @@
   --gold-dk:#8d6f27;
   --gold-lt:#d9c089;
   --gold-pale:#f2e8d2;
+  --red:#c1121f;
   --gold-wash:#f8f1e1;
 
   --ink:#455151;
@@ -121,21 +122,41 @@ section{position:relative}
 
 /* ---------- header ---------- */
 .site-head{
-  position:fixed;top:12px;left:0;right:0;z-index:100;
-  display:flex;justify-content:center;padding:0 16px;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:center;padding:14px 16px 0;
 }
 .site-head__bar{
-  width:100%;max-width:1180px;height:60px;background:rgba(255,255,255,.94);
-  backdrop-filter:blur(10px);border-radius:10px;box-shadow:var(--shadow-card);
-  display:flex;align-items:center;gap:28px;padding:0 26px;
+  width:100%;max-width:1180px;height:76px;border-radius:12px;
+  display:flex;align-items:center;gap:28px;padding:0 12px;
+  background:transparent;box-shadow:none;
+  transition:background-color .4s var(--ease),box-shadow .4s var(--ease),height .4s var(--ease),padding .4s var(--ease);
 }
-.brand{display:flex;align-items:baseline;gap:12px;flex:0 0 auto}
-.brand__mark{
-  font-family:var(--t-headline-font);font-size:19px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink);white-space:nowrap;
+body.is-scrolled .site-head__bar{
+  height:60px;padding:0 20px;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);box-shadow:var(--shadow-card);
 }
-.brand__mark b{color:var(--gold-dk);font-weight:400}
-.nav{display:flex;gap:22px;margin-left:auto;align-items:center}
+/* logo lockup: seal + name + tagline */
+.brand{display:flex;align-items:center;gap:14px;flex:0 0 auto}
+.brand__seal{width:54px;height:54px;flex:0 0 auto;transition:width .4s var(--ease),height .4s var(--ease)}
+body.is-scrolled .brand__seal{width:42px;height:42px}
+.brand__seal-txt{
+  font-family:var(--t-text-font);font-size:7.6px;font-weight:500;letter-spacing:.14em;
+  fill:var(--gold-dk);
+}
+.brand__seal-mono{
+  font-family:var(--t-headline-font);font-size:30px;fill:var(--gold-dk);letter-spacing:.01em;
+}
+.brand__words{display:flex;flex-direction:column;gap:3px;white-space:nowrap}
+.brand__name{
+  font-family:var(--t-headline-font);font-size:23px;line-height:1;color:var(--ink);
+  transition:font-size .4s var(--ease);
+}
+body.is-scrolled .brand__name{font-size:19px}
+.brand__tag{
+  font-size:9.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk);
+}
+.nav{display:none}
+.nav-unused{display:flex;gap:22px;margin-left:auto;align-items:center}
 .nav a{
   font-size:13px;color:var(--ink-soft);position:relative;padding:6px 0;
   transition:color .3s var(--ease);
@@ -148,7 +169,7 @@ section{position:relative}
 .nav a:hover::after{transform:scaleX(1)}
 .nav a:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}
 .nav a:active{transform:translateY(1px)}
-.lang{display:flex;align-items:center;gap:2px;flex:0 0 auto;border-left:1px solid var(--line);padding-left:20px}
+.lang{display:flex;align-items:center;gap:4px;flex:0 0 auto;margin-left:18px}
 .lang button{
   font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--ink-faint);padding:5px 8px;border-radius:5px;
   transition:color .3s var(--ease),background-color .3s var(--ease);
@@ -156,21 +177,24 @@ section{position:relative}
 .lang button:hover{color:var(--ink)}
 .lang button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .lang button:active{transform:translateY(1px)}
-.lang button[aria-pressed="true"]{color:#fff;background:var(--gold-dk)}
+.lang button[aria-pressed="true"]{color:var(--gold-dk);background:transparent;border-bottom:1.5px solid var(--gold)}
 
 .burger{
-  display:none;align-items:center;gap:9px;margin-left:auto;
-  height:38px;padding:0 17px;border-radius:999px;color:#fff;
-  background:linear-gradient(135deg,#cdab5c 0%,#b4913c 52%,#9a7a2c 100%);
-  font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  box-shadow:var(--shadow-gold);
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+  display:flex;align-items:center;gap:11px;margin-left:auto;
+  height:48px;padding:0 24px;border-radius:999px;color:var(--gold-dk);
+  background:rgba(255,255,255,.5);border:1.5px solid var(--gold-lt);
+  font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  transition:transform .3s var(--ease),background-color .3s var(--ease),border-color .3s var(--ease);
 }
+.burger:hover{background:#fff;border-color:var(--gold)}
+body.is-scrolled .burger{height:40px;padding:0 18px;font-size:11px}
 .burger:active{transform:translateY(1px)}
 .burger:focus-visible{outline:2px solid var(--gold-dk);outline-offset:3px}
 .burger__ico{display:flex;flex-direction:column;gap:4px}
+.burger__ico i:nth-child(1){width:17px}
+.burger__ico i:nth-child(2){width:12px;align-self:flex-start}
 .burger__ico i{
-  display:block;width:15px;height:1.5px;background:#fff;
+  display:block;width:17px;height:1.6px;background:var(--gold-dk);
   transition:transform .35s var(--ease);
 }
 .menu{
@@ -227,23 +251,43 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 }
 
 /* ---------- hero ---------- */
-.hero{padding:128px 0 0;overflow:hidden}
-.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:540px}
-.hero__copy{position:relative;z-index:2;max-width:670px;padding:20px 0 0}
-.hero__chip,.chip{
+.hero{padding:150px 0 0;overflow:hidden}
+.hero__grid{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:700px}
+.hero__copy{position:relative;z-index:2;max-width:625px;padding:8px 0 0}
+.chip{
   display:inline-flex;align-items:center;gap:9px;background:#fff;border-radius:999px;
   padding:8px 18px;font-size:12px;color:var(--ink-soft);box-shadow:var(--shadow-card);
 }
-.hero__chip i,.chip i{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:0 0 auto}
-.hero h1{margin:26px 0 0}
-.hero__sub{margin-top:22px;font-size:16px;color:var(--ink-soft);max-width:490px}
-.hero__cta{position:relative;z-index:2;margin:34px 0 76px}
-/* cut-out figure sits on the marble and is cropped by the section edge */
-.hero__photo{
-  position:absolute;right:0;bottom:0;z-index:1;pointer-events:none;
-  width:min(47%,505px);height:540px;overflow:hidden;
+.chip i{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+/* outlined pill, two lines, heart — as in the mockup */
+.hero__chip{
+  display:inline-flex;align-items:center;gap:13px;border-radius:999px;
+  padding:13px 26px;font-size:14px;font-weight:500;line-height:1.35;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink);
+  background:rgba(255,255,255,.42);border:1.5px solid var(--gold-lt);
 }
-.hero__photo img{width:100%;height:auto;display:block}
+.heart{width:17px;height:17px;fill:var(--red);flex:0 0 auto}
+.hero__title{margin:30px 0 0;font-size:clamp(30px,3.6vw,52px);line-height:1.06;letter-spacing:.005em;overflow-wrap:normal}
+.hero__title em,.hero__title b,.hero__title i{font-style:normal;font-weight:400;display:block}
+.hero__title b{
+  background:linear-gradient(160deg,#E3C583 0%,#C9A44C 42%,#9A7A2C 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero__title i{font-size:.52em;letter-spacing:.06em;margin-top:.18em;color:var(--ink)}
+.hero__rule{display:flex;align-items:center;gap:16px;max-width:430px;margin:34px 0 0}
+.hero__rule::before,.hero__rule::after{
+  content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent);
+}
+.hero__sub{margin-top:26px;font-size:16px;line-height:1.6;color:var(--ink-soft);max-width:480px}
+.hero__sub b{color:var(--gold-dk);font-weight:600;white-space:nowrap}
+.hero__cta{position:relative;z-index:2;margin:38px 0 84px}
+.hero__cta .btn{min-height:66px;padding:0 52px;font-size:14px;letter-spacing:.13em}
+/* cut-out figure bleeds to the right edge and is cropped by the section */
+.hero__photo{
+  position:absolute;right:calc(50% - 50vw);bottom:0;top:76px;z-index:1;pointer-events:none;
+  width:min(46vw,660px);overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-end;
+}
+.hero__photo img{height:100%;width:auto;max-width:none;display:block;margin-bottom:-2px}
 
 /* ---------- cards: who ---------- */
 .cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:var(--s-6)}
@@ -616,12 +660,34 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   .band{padding:var(--s-6) 0}
   /* the reference leads with the message, then the portrait, button over its lower edge */
   .h2 br{display:none}
-  .hero{padding:104px 0 34px}
+  .hero{padding:100px 0 34px}
   .hero__grid{flex-direction:column;align-items:stretch;min-height:0;text-align:center}
   .hero__copy{order:1;max-width:none;padding:0}
-  .hero__photo{order:2;position:static;width:min(100%,330px);height:auto;margin:16px auto 0}
+  .hero__photo{
+    order:2;position:static;top:auto;width:min(100%,330px);height:auto;
+    margin:18px auto 0;display:block;overflow:visible;
+  }
+  .hero__photo img{width:100%;height:auto;max-width:100%;margin-bottom:0}
   .hero__cta{order:3;position:relative;z-index:3;margin:-40px 0 0}
-  .hero__sub{max-width:none}
+  .hero__cta .btn{min-height:58px;padding:0 30px;font-size:13px}
+  .hero__chip{padding:11px 20px;font-size:12.5px;gap:10px}
+  .hero__title{margin-top:26px}
+  .hero__rule{margin:28px auto 0;max-width:300px}
+  .hero__sub{max-width:none;margin-left:auto;margin-right:auto;font-size:15px}
+  /* header lockup scales down; the pill keeps its label only where there is room */
+  .site-head{padding:10px 12px 0}
+  .site-head__bar{height:62px;gap:10px;padding:0 8px}
+  body.is-scrolled .site-head__bar{height:56px;padding:0 12px}
+  .brand{gap:10px}
+  .brand__seal{width:40px;height:40px}
+  body.is-scrolled .brand__seal{width:36px;height:36px}
+  .brand__name{font-size:17px}
+  body.is-scrolled .brand__name{font-size:16px}
+  .brand__tag{font-size:8px;letter-spacing:.16em}
+  .burger{height:40px;padding:0 15px;gap:8px;font-size:10.5px;letter-spacing:.1em}
+  body.is-scrolled .burger{height:38px;padding:0 14px}
+  .lang{margin-left:8px}
+  .lang button{padding:5px 6px;font-size:11px}
   .cards-3{grid-template-columns:1fr;gap:28px;max-width:440px;margin-left:auto;margin-right:auto}
   .pain{grid-template-columns:1fr}
   .pain__card{grid-column:1;margin-right:0;padding:34px 28px;order:2}
@@ -689,14 +755,19 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   .tariff__name{padding-right:58px}
 }
 /* smallest phones: the menu pill drops its label so the bar still fits */
-@media (max-width:380px){
-  .site-head__bar{padding:0 12px;gap:8px}
-  .brand__mark{font-size:15px;letter-spacing:.1em}
+@media (max-width:520px){
   .burger{padding:0 13px;gap:0}
   .burger .ru,.burger .fr{display:none!important}
-  .lang{padding-left:10px}
-  .lang button{padding:5px 6px}
-  .h1{font-size:24px}
+}
+@media (max-width:380px){
+  .site-head__bar{padding:0 6px;gap:8px}
+  .brand{gap:8px}
+  .brand__seal{width:34px;height:34px}
+  .brand__name{font-size:14px}
+  .brand__tag{display:none}
+  .lang{margin-left:4px}
+  .lang button{padding:5px 5px;font-size:10px}
+  .hero__title{font-size:26px}
   .slogan{font-size:20px}
   .book__headline{font-size:20px}
   .tariff__name{font-size:19px;padding-right:52px}
@@ -708,18 +779,26 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 <!-- ============ HEADER ============ -->
 <header class="site-head">
   <div class="site-head__bar">
-    <a class="brand" href="#top" aria-label="SWIBROWS">
-      <span class="brand__mark">Swi<b>brows</b></span>
+    <a class="brand" href="#top" aria-label="Svetlana Swibrows">
+      <svg class="brand__seal" viewBox="0 0 100 100" role="img" aria-label="SWIBROWS">
+          <defs>
+            <linearGradient id="sealGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E3C583"/><stop offset="45%" stop-color="#C9A44C"/><stop offset="100%" stop-color="#9A7A2C"/>
+            </linearGradient>
+            <path id="sealTop" d="M 16,52 A 34,34 0 0 1 84,52"/>
+            <path id="sealBot" d="M 22,52 A 28,28 0 0 0 78,52"/>
+          </defs>
+          <circle cx="50" cy="50" r="40.5" fill="none" stroke="url(#sealGold)" stroke-width="1.4"/>
+          <text class="brand__seal-txt"><textPath href="#sealTop" startOffset="50%">SVETLANA PERMANENT</textPath></text>
+          <text class="brand__seal-txt"><textPath href="#sealBot" startOffset="50%">SWIBROWS</textPath></text>
+          <text class="brand__seal-mono" x="46" y="60" text-anchor="middle">SW</text>
+          <path d="M 60,30 C 76,36 78,52 66,62" fill="none" stroke="url(#sealGold)" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      <span class="brand__words">
+        <span class="brand__name">Svetlana Swibrows</span>
+        <span class="brand__tag"><span class="ru">Удаление пигмента</span><span class="fr">Détatouage de pigment</span></span>
+      </span>
     </a>
-    <nav class="nav" aria-label="main">
-      <a href="#who"><span class="ru">Для кого</span><span class="fr">Pour qui</span></a>
-      <a href="#programme"><span class="ru">Программа</span><span class="fr">Programme</span></a>
-      <a href="#about"><span class="ru">Обо мне</span><span class="fr">À propos</span></a>
-      <a href="#works"><span class="ru">Работы</span><span class="fr">Réalisations</span></a>
-      <a href="#price"><span class="ru">Стоимость</span><span class="fr">Tarifs</span></a>
-      <a href="#faq"><span class="ru">Вопросы</span><span class="fr">FAQ</span></a>
-      <a href="#booking"><span class="ru">Бронирование</span><span class="fr">Réservation</span></a>
-    </nav>
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu">
       <span class="burger__ico" aria-hidden="true"><i></i><i></i></span>
       <span class="ru">Меню</span><span class="fr">Menu</span>
@@ -743,20 +822,24 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
 <main id="top">
 
 <!-- ============ HERO ============ -->
-<section class="hero marble marble--deep">
+<section class="hero marble marble--deep" id="hero">
   <div class="wrap hero__grid">
     <div class="hero__copy reveal">
-      <span class="hero__chip"><i></i>
-        <span class="ru">Мы провели больше 6000 процедур удаления</span>
-        <span class="fr">Nous avons réalisé plus de 6 000 procédures de détatouage</span>
+      <span class="hero__chip">
+        <span class="ru">Мы провели больше<br>6000 процедур удаления</span>
+        <span class="fr">Nous avons réalisé plus de<br>6 000 procédures de détatouage</span>
+        <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.9-7.5-10.4A4.6 4.6 0 0 1 12 7.6a4.6 4.6 0 0 1 7.5 3A11.9 11.9 0 0 1 12 21Z"/></svg>
       </span>
-      <h1 class="h1">
-        <span class="ru">Больше уверенности. <br>Больше востребованности. <br>Больше дохода</span>
-        <span class="fr">Plus de confiance. <br>Plus de demande. <br>Plus de revenus.</span>
+      <h1 class="h1 hero__title">
+        <span class="ru"><em>Больше уверенности.</em> <b>Больше востребованности.</b> <i>Больше дохода</i></span>
+        <span class="fr"><em>Plus de confiance.</em> <b>Plus de demande.</b> <i>Plus de revenus.</i></span>
       </h1>
+      <span class="hero__rule" aria-hidden="true">
+        <svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-7.5-10.4A4.6 4.6 0 0 1 12 7.6a4.6 4.6 0 0 1 7.5 3A11.9 11.9 0 0 1 12 21Z"/></svg>
+      </span>
       <p class="hero__sub">
-        <span class="ru">Мастер и преподаватель по удалению пигмента с 2015 года</span>
-        <span class="fr">Maîtresse et formatrice en détatouage de pigment depuis 2015</span>
+        <span class="ru">Мастер и преподаватель по удалению пигмента <b>с 2015 года</b></span>
+        <span class="fr">Maîtresse et formatrice en détatouage de pigment <b>depuis 2015</b></span>
       </p>
     </div>
     <div class="hero__cta reveal">
@@ -1551,6 +1634,14 @@ body.is-menu-open .burger__ico i:nth-child(2){transform:translateY(-2.75px) rota
   document.querySelectorAll("[data-set-lang]").forEach(function(b){
     b.addEventListener("click", function(){ setLang(b.dataset.setLang); });
   });
+
+  /* ---- header: transparent over the hero, solid once scrolled ---- */
+  var head = document.querySelector(".site-head");
+  var onScroll = function(){
+    document.body.classList.toggle("is-scrolled", window.scrollY > 40);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   /* ---- mobile menu ---- */
   var burger = document.querySelector(".burger");
